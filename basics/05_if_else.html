@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        if (10 > 5) { // true
+            console.log("#1 will console log");
+        }  
+
+        if (7 <= 7) { // true
+            console.log("#2 will console log ");
+        }
+
+        if ( 8 <= 7 ) { // false
+            console.log("#3 will not console log");
+        }
+
+        let data1 = 9;
+        if (data1 > 5) { // true
+            console.log("#4 will console log because 9 is more than 5");
+        }
+
+        if (data1 < 5) { // false
+            console.log("#5 will not console log");
+        } else {
+            console.log("#5 will console log");
+        }
+
+        let info = 23;
+
+        if (info < 0) {
+            console.log("info less than 0");
+        } else if (info == 0) {
+            console.log("info is equal 0");
+        } else if (info == 2) {
+            console.log("info is equal 2");
+        } else {
+            console.log("last else for info:", info);
+        }
+
+        if (10 != 8) {
+            console.log("will console.log");
+        }
+
+        if (true) {
+            console.log("true, will console log");
+        }
+
+        if (true == true) {
+            console.log("true is equal true, will console log");
+        }
+
+        // 5 is true because only 0 is false
+        if (5) {
+            console.log("value 5");
+        }
+
+        // 0 is false - will not log
+        if (0) {
+            console.log("0 will not log");
+        }
+
+        if (-10) console.log("will log - true");
+
+        /*
+            - if temperature < 0  "take jacket"
+            - if temperature == 0  "take light jacket"
+            - if temperature >= 20  "take t-shirt"
+            - else "stay in home"
+        */
+
+        let temperature = 1;
+
+        if (temperature < 0) {
+            console.log("take jacket");
+        } else if (temperature == 0) {
+            console.log("take light jacket");
+        } else if (temperature >= 20) {
+            console.log("take t-shirt");
+        } else {
+            console.log("stay in home");
+        }
+
+    </script>
+</body>
+</html>

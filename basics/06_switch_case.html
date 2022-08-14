@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = 0;
+
+        if (data == 0) {
+            console.log("data equals 0");
+        } else if (data == 1) {
+            console.log("data equals 1");
+        } else if (data == 3) {
+            console.log("data equals 3");
+        } else if (data == 5) {
+            console.log("data equals 5");
+        } else {
+            console.log("data equals exact:", data);
+        }
+
+
+        data = 15;
+        switch (data) {
+            case 0:
+                console.log("data equals 0");
+                break;
+            case 1:
+                console.log("data equals 1");
+                break;
+            case 3:
+                console.log("data equals 3");
+                break;
+            case 5:
+                console.log("data equals 5");
+                break;
+            default:
+                console.log("data equals exact:", data);
+        }
+
+
+        /*
+            temperature with swicth case
+            case: -5, 0, 5, 15, 20
+            default: temperatura equals exactlly
+        */
+
+        let temperature = 22;
+        switch (temperature) {
+            case -5:
+                console.log("#1 equals:", temperature);
+                break;
+            case 0:
+                console.log("#2 equals:", temperature);
+                break;
+            case 5:
+                console.log("#3 equals:", temperature);
+                break;
+            case 15:
+                console.log("#4 equals:", temperature);
+                break;
+            case 20:
+                console.log("#5 equals:", temperature);
+                break;
+            default:
+                console.log("default - temperatura equals exactlly:", temperature);
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
