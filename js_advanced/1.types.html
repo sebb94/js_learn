@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+
+  // o type decuduje wartosc zmiennej
+  // wszystko co nie jest typem prostym jest obiektem - kazdy obiekt jest instacją object
+  // TYPY PROSTE (PRYMITYWNE) - piszemy z malej litery
+
+  let num = 7 // typeof -> number
+  let str = "text" // typeof -> string
+  let flag = true  // typeof -> boolean
+  let el = null  // typeof -> object
+  let info // typeof -> undefined
+  let mySymbol = Symbol("Sym") // typeof -> symbol
+  let bigInt = 1n; // typeof -> bigInt
+
+
+  // TYPY ZLOZONE 
+  let obj = new Object() // typeof -> Object
+  let arr = new Array(1,2,3) // typeof -> Object
+  let date = new Date() // typeof -> Object
+  let err = new Error() // typeof -> Object
+  let n = new Number(7) // typeof -> Object
+  let obj2 = {
+    a: 10,
+    b: 2,
+    print: function(){
+        console.log('asd')
+    }
+  } // typeof -> Object
+
+
+  let number = 10.3234 // typeof -> number
+  let number2 = new Number(number) // typeof object
+  num2.toFixed(3) // 10.323
+
+  // jezeli na typie prostym chcemy zrobic funckcje dla obiektu number np toFixed a mamy tylko typ prosty
+  // to Js tworzy w pamieci specjalny obiekt - potem jest kasowany
+
+</script>    
+</body>
+</html>

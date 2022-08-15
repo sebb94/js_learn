@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* mutowalnosc = charakterystyka typu zmiennej, której wartosc moze byc zmieniona
+  w JS tylko obiekty oraz tablice mogą być zmieniane a prymitywy nie 
+  prywmitywy mogą przyjmować inną różne wartości - nazwa zmiennej wskazuje na nową wartość przy
+  różnych operacjach
+  */
+  let x = 4; //4 
+  x++  // 5
+  // x ma wartosc 5 (nowe miejsce w pamieci) - wartosc 4 zostanie dla garbage collecotor do skasowania
+  let txt = "Hello "
+  txt = txt + " swiecie"
+  /* 
+    1. wartosc txt zostaje pobrana
+    2. "swiecie" jest dodane do wartosci txt
+    3. wynik jest zapisywany w nowym miejscu w pamieci
+    4. txt wskazuje na nowo powstaly text w pamieci
+    5. poczatkowa wartosc jest dla garbage collectora do skasowania
+  */ 
+  var str = "Ala ma kota"
+  str[0] = "X" // mozna zrobic console.log(str[0])
+  console.log(str) // Ala ma kota bo string jest niemutowalny
+  // 
+  let arr = [1,2,3]
+  arr[0] = 7 
+  console.log(arr) // [7,2,3] -> tablice sa mutowalne
+
+</script>    
+</body>
+</html>
