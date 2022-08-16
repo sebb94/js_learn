@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+    // typeof zwraca string opisujacy typ wartosci sprawdzanej zmiennej
+
+    typeof 23 // number
+    typeof "tekst" // string
+    typeof "45" // string
+    typeof true // boolean
+    typeof undefined // undefined
+    typeof 1n //bigInt
+    typeof Symbol() // symbol
+    typeof function(){} // function
+    typeof {data: 10} // object
+    typeof [] // object
+    typeof null // object
+
+    let data = 10
+
+    function info(a){
+        if ( typeof a === 'number'){
+           console.log(`a to liczba: ${a}`)
+        }
+        if ( typeof a === 'string'){
+           console.log(`a to string: ${a}`)
+        }
+        if ( typeof a === 'object'){
+           console.log(`a to obiekt: ${a}`)
+        }
+    }
+
+    info(data) // a to liczba 10
+    data = "45"
+    info(data) // a to string 45
+    data = {a: 10}
+    info(data) // a to [obect Object]
+ 
+</script>    
+</body>
+</html>

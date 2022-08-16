@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+  let a = 25 // 25
+  let b = a  // 25
+  let c = b // 25
+  c++ // a - 25, b - 25, c - 26
+
+  // rozne zmiennie moga wsakzywac na ten sam obiekt (w pamięci)
+
+  let obj = {
+    a: 10,
+    b: "tekst"
+  }
+  let data = obj // wskazuje na obiekt
+  let asd = data 
+  // data.a = 10, obj.a = 10
+  data.a = 25
+  // data.a = 25, obj.a = 25
+  console.log(asd.b) // tekst
+
+
+  // funkcje -- typy proste nie sa modyfikowane przez funkcje poza nią
+  function passByValue(num,str){
+    num+=10;
+    str+=" !!!"
+    console.log(`passByValue num ${num}, str: ${str}`)
+  }
+
+  let someNum = 12;
+  let someStr= "Tekst"
+  console.log(`before function someNum ${someNum}, someStr ${someStr}`) // 12, tekst
+  passByValue(someNum,someStr) // 22, tekst !!!
+  console.log(`afterfunction someNum ${someNum}, someStr ${someStr}`) // 12, tekst
+
+  // w przeciwienstwie do typow prostych obiekty przekazywane sa funkcjom przez referencje, przez co ich zmiany
+  // wewnatrz funkcji beda widoczne poza funkcja
+  function passByReference(arr, obj){
+    arr.push(99)
+    obj.a = 5
+  }
+  let testArr = [1,2]
+  let testObj = {
+    a: 10,
+    b:20 
+  }
+  // arr = [1,2], obj {a:10, b:20}
+  passByReference(testArr,testObj)
+  console.log(testArr) // [1,2,99]
+  console.log(testObj) // {a:5, b:20}
+
+  // example
+  function someFunc(v, obj){
+    v = 15 + 10;
+    obj.str = obj.str.toUpperCase()
+    obj.num -= 11
+    obj.obj.z += 11
+ }
+  
+  let x = 20;
+  let z = {
+    str: "Test",
+    num: 23, 
+    obj: {
+      z: 9
+    }
+  }
+  console.log(x,z)
+  /* 
+   x - 20
+   z.str - Test
+   z.num - 23
+   z.obj.z - 9
+  */
+  someFunc(x,z)
+  console.log(x,z)
+   /* 
+   x - 20
+   z.str - TEST
+   z.num - 12
+   z.obj.z - 20
+  */
+</script>    
+</body>
+</html>
