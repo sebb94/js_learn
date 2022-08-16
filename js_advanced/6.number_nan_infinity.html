@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   // number - 64 bitowa liczba zmiennioprzecinkowa (jak double w java)
+
+   let a = 1 //number
+   const b = 10.45 //number
+   var d = 0xf // number 15
+   const c = .45 // number 0.45
+
+   // z liczbami są zwiazane globalne predefiniowane zmienne NaN oraz Inifinity
+   // MIN/MAX SAFE INTEGER -/+ 9 007 199 254 740 991
+
+
+   // NaN - Not a Number
+
+   parseInt("hello") // NaN
+   Math.sqrt(-1) // NaN
+   0 / 0 // NaN
+
+   isNaN(Number.Nan) // true
+   isNaN(NaN) // true 
+   isNaN(78) // false
+
+   // Infinity
+
+   1 / 0 // infinity
+   -1 / 0 // -infinity
+
+   Number.isFinite(35) // true
+   Number.isFinite() // false 
+
+   Number.MAX_VALUE
+   Number.MIN_VALUE
+   Number.isNaN(NaN) // true
+   Number.parseFloat("4.678asdasd") // strina na liczbe 4.678 
+   Number.parseInt("3454") // liczba calkowita 3454
+   Number.isInteger(10 / 5) // true
+   Number.isInteger(10 / 3) // false
+   2.2346.toFixed(3) // 2.234
+
+   var x = 2.05 * 100 // 204.9999999999999997
+   Math.round(2.05 * 100) // 205
+
+ 
+</script>    
+</body>
+</html>

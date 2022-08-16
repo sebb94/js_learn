@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* typ boolean
+   wartosc true lub false
+   */
+
+   let flag = true 
+   if(flag){
+    console.log("will show message in console")
+   }
+
+   /*
+    falsy values - jeżeli jest konwersja z falsy values na boolean - będzie false
+    Falsy values
+    "" // pusty string
+    0, -0 
+    0n
+    NaN 
+    undefined
+    false 
+   */
+
+    let data = 0 
+    if(data){
+        console.log('data will not show')
+    }
+    data = 1 
+    if(data){
+        console.log('data will show')
+    }
+
+    // obiekty dają prawdę ale jest 1 wyjatek którego sie już nie używa
+    if (document.all){
+        console.log('data will not show')
+    }
+
+    /* Turthy values - wszystko inne co nie jest falsy
+    "test"
+    35
+    true
+    []
+    [1,2,3]
+    {}
+    {a:1,b:2}
+    document
+    function test(){}
+    */
+
+    let a = new Boolean(false)
+    if(a){
+        console.log('data will show') // poniewaz OBIEKT!!! nawet jak ma false!!
+    }
+
+</script>    
+</body>
+</html>

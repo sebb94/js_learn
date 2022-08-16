@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* undefined and NULL
+
+   Undefined to indentyfikator zarówno typ jak i wartość - undefined ma tylko 1 wartość
+   automatycznie jest przypisywana do nowo zadeklarowanej zmienniej, która nie ma wartosci
+   zwykle rozumiane jako brak wartosc - wartosc nie zostala jeszcze powiazana ze zmienna
+   */
+
+   let data 
+   typeof data //undefined
+
+   // ciekawostka - mozna nadac zmiennej undefined wartosc w funkcji ale to karygodne
+
+   function test(){
+    var undefined = 2 
+    console.log(undefined) // 2
+   }
+
+   // NULL - oznacza wartosc pusta, która wczesniej przechowywała jakąś wartośc i już nie przechowuje
+   // NULL jest słowem kluczowym a nie identyfikatorem
+
+   let data2 = 10
+   data2 = null 
+   typeof null //object!!
+
+   // przy konwersji na boolean null i undefined daja false
+
+   if(null){
+    console.log('nie wykona sie')
+   }
+
+   if(undefined){
+    console.log('nie wykona sie')
+   }
+
+   // porownania
+
+   if(null == undefined){
+    console.log('wykona sie bo false == false czyli true :)')
+   }
+   if(null === undefined){
+    console.log('nie wykona się, bo inne typy :)')
+   }
+
+ 
+</script>    
+</body>
+</html>

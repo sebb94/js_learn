@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* string 
+    '' - apostrof
+    "" - cudzysłow
+    `` - literał szablonu
+
+   */
+
+   const str = "Witaj" + " świecie!" // laczenie
+   let strLength = "Tekst".length // 5
+   "".length // 0
+   str[2] // t
+   str[str.length - 1] // ! 
+   str.charAt(6) // ś
+
+   /* 
+   indexOf oraz lastIndexOf 
+   indexOf wyszukuje pierwsze wystapienie tekstu w stringu
+   1 argument tekst do wyszukania, 2 argument opcjonalny od ktorego indexu ma sie szukac
+   */
+
+   let a = "Ala ma kota. Dodatkowo Ala ma psa"
+   let pos = text.indexOf("ma") // pos = 4 (index od 0)
+   let pos2 = text.indexOf("ma", 5) // pos2 = 27
+   let pos3 = text.indexOf("ma",28) // pos3 = -1 
+
+   // lastIndexOf - wyszukanie od konca
+
+   let b = "Dzien jak codzien"
+   let pos4 = str.lastIndexOf("jak", 10) // szukanie od c (od poczatku od 10 znaku), pos4 = 6
+
+   // search&trim 
+
+   let re = /[A-Z]/g; 
+   let text = "jakis Tekst".search(re) // 6
+
+   " Hello World!   \n".trim() // usunie biale znaki
+
+   "TeKst".toLowerCase() // tekst
+   "TeKst".toUpperCase() // TEKST
+
+   // CONCAT - łaczenie stringu
+
+   let a1 = "text1"
+   let b1 = a1.concat(" text2")
+   // a1 - text1 | a2 - text1 tekst2
+   let c1 = b.concat(" text3").concat( "text4")
+   // c1 - text1 text2 text3 text 4
+   let d1 = a1 + " other text"
+   // d1 - text1 other text
+
+   /* SLICE (start, end)
+    start - miejsce rozpoczynajace fragment, jeśli ujemna wartośc to liczone od końca stringa
+    np -2 to str.lenght - 2
+    end - koniec przed którym będzie koniec fragmentu, znak pod tym indekstem nie będzie uwzlędniony, 
+    jeśli pominięte to do końca stringa
+    Jeśli ujemna wartość to liczone od końca stringa np -1 to str.length - 1
+   */ 
+
+   let seba = "01234567"
+   let t = seba.slice(1,6) // "12345"
+   let t2 = seba.slice(-1,8) // "7" (tak jakby 7,8)
+   let t3 = seba.slice(-3) // "567" (tak jakby 5, do konca)
+   let t4 = seba.slice(-3,-1) // "56" (5,7)
+
+   // substring(start,end) && substr(start,length)
+   
+   let str3 = "012345678"
+   let str3a = str3.substring(3) // 345678
+   let str3b = str3.substring(2,5) // 234
+
+   let str4 = "Ala ma kota."
+   let str4a = str4.substr(1,4) //la m - ilosc znakow
+   let str4b = str4.substr(3) // ma kota. - bez drugiego argumentu do konca
+   let str4c = str4.substr(-3) //ta. - od konca string 
+
+
+   // split - dzieli string na elementy tablicy
+
+   let str5 = "A B C D" 
+   let arr = str5.split(" ")
+   console.log(arr.length) // 4
+   console.log(arr[2]) // C
+
+   let str6 = "Skoda|Audi|BMW"
+   let arr2 = str6.split("|")
+   console.log(arr2[0]) // Skoda
+
+
+   // replace
+
+   let txt = "html Css Javascript PHP Python Sql"
+   let langs = txt.replace(/sql/i, "MongoDb") // i - case sensivity
+   console.log(txt) // html Css Javascript PHP Python mongoDB
+
+   let txt2 = "Jakis Tekst"
+   let ret = txt2.replace(/[A-Z]/g, "X")
+   console.log(txt2) // Xakis Xekst
+
+   let txt3 = "kiwi banan cytryna cytryna"
+   let e = txt3.replace(/cytryna/, "ananas")
+   console.log(txt3) //kiwi banan ananas cytryna - podmieni tylko pierwsze wystapienie
+
+   let txt4 = "kiwi banan cytryna cytryna"
+   let f = txt4.replace(/cytryna/g, "ananas")
+   console.log(txt4) //kiwi banan ananas ananas - podmieni wszystkie
+
+</script>    
+</body>
+</html>
