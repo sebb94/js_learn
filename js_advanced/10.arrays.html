@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* tablice
+
+    tablice to kolekcje elementow. Nie jest to typ- jest to obiewkt
+    Moga przechowywac dowolne typy - proste i zlozone lub inne tablice
+    Liczone od 0 indeksy
+   */
+
+   let arr = [1,2,3]
+   let arr2 = Array(10,2,3) // new slowko mozna pominac
+  
+   console.log(arr)
+   console.log(arr2)
+   //let arr3 = Array(10) - to lenght - nie jest to dobry pomysl - 10 piustych elementów
+   var arr3 = Array.of(3) // jest to sposob na tablice z 1 elementem [3]
+
+   arr3[1] = "txt"
+   arr3[2] = 10
+   arr3.push(99) // push - dodanie na koncu
+   console.log(arr3, arr3.length) // [3,"txt",10,99] 4 
+
+   // mozna sie pozbyc elemtow zmieniajac lenght
+
+   arr3.length = 2
+   console.log(arr3, arr3.length) // [3,"txt"] 2 
+
+   //delete - skasowanie elementu
+
+   delete arr3[1]
+   console.log(arr3, arr3.length, 2 in arr3) // [3 empty] 2 false
+
+   // zainicjowanie konretną wartoscia
+
+   let arr4 = Array(3).fill("asd")
+   console.log(arr4) // ["asd","asd","asd"]
+
+   // odczytywanie wartosci z tablicy
+   for(let i=0;i<arr4.length;i++){
+    console.log(arr4[i])
+   }
+
+   arr4.forEach((element,index) => {
+    console.log(element,index)
+   });
+
+   let a = [1,2]
+   let b = [3,4]
+   let c = [5,6]
+   let d = a.concat(b,c)
+   console.log(d) // [1,2,3,4,5,6]
+   
+   let e = d.concat([7,8], [9,10])
+   console.log(e) // [1,2,3,4,5,6,7,8,9,10]
+   let f = e.concat( 11,12 [13,14, [15,16]]) 
+   console.log(f)
+
+   // join 
+
+   let arr5 = [1,2,3]
+   let result = arr5.join(',')
+   console.log(arr5) // [1,2,3]
+   console.log(result) // 1,2,3
+   delete arr5[1]
+   result = arr5.join(',')
+   console.log(arr5) // [1,empty,3]
+   console.log(result) // 1,,3
+
+   // reserve 
+
+   let arr6 = [1,2,3]
+   let reverse = arr.reverse() 
+   // zmieni tez tablice oryginalną!
+   console.log(arr6) // [3,2,1]
+   console.log(reverse) // [3,2,1]
+
+   // pop
+
+   let resultFromPop = arr6.pop() // 1 - ostatni element
+   console.log(arr6, resultFromPop) // [3,2] 1 (ostatni element)
+
+   // shift and unshift
+
+   let fruits = ['banana','apple','kiwi','mango']
+   // shift - usuwa pierwszy element, zwraca ten element i modyfikuje tablice
+   fruits.shift() 
+   console.log(fruits) // ['apple','kiwi', mango]
+   let asd = fruits.shift() 
+   console.log(fruits) // ['kiwi', mango]
+   console.log(asd) // 'apple
+
+
+   // unshift - dodaje pierwszy element, zwraca dlugosc, modyfikuje tablice
+   let cars = ["Audi","BMW","Ford"]
+   cars.unshift('Aston Martin')
+   console.log(cars) // ['Aston Martin','Audi','BMW','Ford']
+   let acura = cars.unshift('Acura')
+   console.log(cars) //  ['Acura', 'Aston Martin', 'Audi', 'BMW', 'Ford']
+   console.log(acura) // 5 - dlugosc tablicy!!
+
+
+   // splice - zmienia tablice poprzez usuniecie, zmiane oraz dodanie elementow
+
+   let months = ["styczen","luty","kwiecien","maj"]
+   months.splice(2,0,"marzec") // na 2 indeks, nie usuwa nic
+   console.log(months) // ["styczen","luty","marzec","kwiecien","maj"]
+
+   let deletedElement = months.splice(0,1,"test")
+   console.log(months) // ["test","luty","marzec","kwiecien","maj"]
+   console.log(deletedElement) // ['styczen']
+
+   let arr7 = ["a","b","c","d","e","f"]
+
+   arr7.splice(2,1,"x","y","z") // z 2 indeksu, 1 element, dodanie xyz
+   console.log(arr7) // ["a","b","x","y","z","d","e","f"]
+
+   let arr8 = ["a","b","c","d","e","f"]
+   // kasuje 1 element z indeksu arr.lenght - 2 (6-2 = 4) arr8[4] = "e"
+   let removed2 = arr8.splice(-2,1)
+   console.log(arr8) //  ["a","b","c","d","f"]
+   console.log(removed2) // "e"
+
+</script>    
+</body>
+</html>
