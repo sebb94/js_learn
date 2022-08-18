@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+  // Konwersje 
+
+  // niejawna konwersja - liczba na string
+
+  if ( "1" + 0 == "10"){console.log("wykona sie")}
+  if ( 1 + "0" == "10"){console.log("wykona sie")}
+
+
+  // jawna konwersja - liczba na string
+
+  let a = String(22) // 22
+  let b = String(11.3) // 11.3
+
+
+  // string na liczbe - niejawna
+
+  if( 10 - "4" == 6){console.log("wykona sie")}
+  let c = "" + 111 // "111"
+  let g = +"24" // 24
+  let data = -"67" // -67
+
+  // string na liczbe - jawna
+  let num = Number(10) 
+  let h = parseInt("985")
+  let i = parseInt("200", 16) 
+  console.log(i) // 512
+  let f = parseFloat("3.45")
+
+  // string na boolean
+
+  if ( "test" ){ console.log("string na boolean")}
+  if ( "false" ){ console.log("string na boolean")}
+  if ( "0" ){ console.log("string na boolean")}
+  if ( !"0" ){ console.log("nie wykona sie")}
+  if ( !"false" ){ console.log("nie wykona sie")}
+
+  // obiekt na string
+
+  if ( {} == "[object Object]"){ console.log("obiekt na string")}
+
+  // podwojna negacja
+  // !1 - false !!1 - true !!null - false
+
+  // jawna konwersja na boolean
+
+  Boolean("true") // true
+  Boolean("1") // true 
+  Boolean("false") // true 
+  Boolean("0") // true
+  Boolean(1) // true
+  Boolean(-1) // true
+  Boolean({}) // true
+  Boolean([]) // true
+  
+  Boolean(0) // true
+  Boolean("") // true
+  Boolean(null) // true
+  Boolean(undefined) // true
+
+  // ---
+
+  if (true) console.log('wykona sie')
+  if ([]) console.log('wykona sie')
+  if ({}) console.log('wykona sie')
+  if (35) console.log('wykona sie')
+  if ("0") console.log('wykona sie')
+  if (new Date()) console.log('wykona sie')
+  if ("false") console.log('wykona sie')
+  if (-11) console.log('wykona sie')
+  if (15n) console.log('wykona sie')
+  if (4.23) console.log('wykona sie')
+  if (-4.23) console.log('wykona sie')
+  if (-Infinity) console.log('wykona sie')
+  if (Infinity) console.log('wykona sie')
+
+  // tablica na string 
+
+  let arr = [1,2,3,4].join(',') /// "1,2,3,4"
+  let arr2 = [1,2,3,4]
+  arr2 = arr2.toString()
+  console.log(arr)
+  console.log(arr2)
+
+  const data2 = ["a","b","c"].reduce( function( acc,currentValue, index){
+    console.log(acc,currentValue,index)
+    return acc + "-" + currentValue
+  })
+
+  // Math floor -nawiększa liczba mniejsza lub równa 
+
+  Math.floor(4.8) // 4
+  Math.floor(-4.8) // -5
+  Math.floor(-3.1) // -4 
+  Math.floor(-3) // -3 
+
+  // Math ceil - zaokragla do gory
+  Math.ceil(1.01) // 2
+  Math.ceil(-1.90) // -1 
+
+  // math round - do .49 w dol - od 50 w gore
+
+  let asd = Math.round(4.49)
+  let asd2 = Math.round(4.5)
+  console.log(asd, asd2) // 4 5 
+
+  // math trunc - obcina wartosc dziesietna
+
+  Math.trunc(12.32) // 12
+  Math.trunc(-2.21) // -2
+
+
+</script>    
+</body>
+</html>
