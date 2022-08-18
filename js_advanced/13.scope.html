@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+  // blok kodu to 1 lub kilka instrukcji zebranych  w parze nawiasów klamrowych
+   var amount = 1
+   var tax = 0
+   if (amount > 0) {
+     tax = amount * 0.23 
+     amount = amount + tax 
+   }
+   console.log(amount) // 1.23
+
+   /* 
+     Zakres. tzw scope - w jezykach programowania scope jest definiowany przez blok kodu ale nie w JS
+     W JS scope jest lokalny oraz globalny - zakres to widocznosc zmiennych dla poszczegolnych czesci programu
+
+     ZAKRES GLOBALNY - istnieje przez cale zycie skryptu, raz zadeklarowana zmienna globalna juz tam pozostanie z wyjątkiem
+     użycia delete. Globalna zmienna moze byc uzywana wewnatrz funkcji oraz poza nia - gdziekolwiek w obiekcie window
+
+     ZAKRES LOKALNY - istnieje wewnatrz ciala funkcji w ktorej zostala zadeklarowana, włączajac argumenty fukcji
+
+     Domyślnie JS nie ma zakresu blokowego co powoduje problemy
+   */ 
+
+   var someGlobal = "Ala "
+
+   function test(param){
+    var txt = " kota"
+    console.log(someGlobal + param + txt)
+   }
+
+   test("ma") // "Ala ma kota"
+  // console.log(txt) - Uncaught ReferenceError: txt is not defined
+
+  var someData = 99 
+
+  function test2(){
+    var someData = 1000 
+    console.log("Global someData: " + window.someData)
+    console.log("Lokal someData: " + someData)
+  }
+
+  test2() // window.someData = 99, local someData = 1000
+  console.log(someData) // 99
+
+  // UWAGA - brak var przy deklaracji zmiennej wewnatrz funkcji spowoduje powstanie zmiennej globalnej!
+  
+  function test3(){
+   // "use strict"
+    var a = 5;
+    b = 10 // z "use strict" - "b is not defined"
+  }
+
+   // console.log(b) -  ReferenceError: b is not defined
+   test3()
+   console.log(b) // 10
+   console.log(window.b) // 10
+
+    // wywołana funkcja moze zmienic wartosc zmiennej globalnej
+
+    var e = 10 
+    function doSth(){
+        e = 50
+    }
+
+    doSth()
+    console.log(e) // 50
+
+    // jezeli deklarujemy w petli licznik za pomoca var lub w bloku kodu - dostep bedzie globalny
+
+    for(var i = 0; i < 5 ; i++){
+        console.log(i)
+    }
+
+    console.log("Global i: " + i) // z let by dawalo error - ReferenceError: i is not defined
+
+    if ( 1 === 1){ 
+        var f = 20 
+    }
+
+    console.log("Global f: " + f) // z let by dawało error - ReferenceError: f is not defined
+
+    // let i const maja zasieg blokowy
+
+    // ponowne deklaracje - var mozliwe, let nie 
+
+    var asd = 12
+    var asd = 13 
+
+    let asd2 = 13 
+   // let asd2 = 13  asd 2Already declared
+
+
+   // let - nie moze byc zadeklarowana ponownie, ale moze byc uzyta w zagnieszgonym bloku
+
+   let x = 5 
+   if (1 === 1){
+    let x = 99 
+    x = 100 
+    console.log(x) // 100
+   }
+
+   console.log(x) // 5
+
+   let y = 5 
+   if (1 == 1){
+    y = 100
+    console.log(y) // 100
+   }
+   console.log(y) // 100
+
+</script>    
+</body>
+</html>
