@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* 
+     Obiekty  to wszystkie wartosci ktore nie sa prymitywami.
+     Obiekt jest kolekcją właściwosci, każda ma nazwę oraz wartosc 
+     w przeglaradce przykłady obietków w JS to np console, Math, Date, widnow itd
+
+     */ 
+
+     var o = {} // pusty obiekt
+     typeof o // object
+     var arr = [1,2,3] // literał tablicowy
+     typeof arr // object
+
+     var car = {
+        name: "Audi",
+        model: "A3",
+        year: 2003,
+        details: {
+            type: "hatchback",
+            petrol: "pb"
+        },
+        info: function(){
+            console.log(this.name, this.model, this.year, this.details.type)
+        }
+     }
+
+     car.info()
+
+     // Obiekty mozna tworzyc za pomoca funckji konstruujacych - jak konstruktory w innych jezykach
+
+     let car2 = new Object()
+     car2.name = "BMW"
+     car2.info = function(){
+            console.log(this.name)
+    }
+    
+    car2.info()
+
+    // inne funkcje konstruujące
+
+    var d = new Date(2030,12,29)
+    var arr = new Array()
+    var str = new String(10)
+    var n = new Number(1234)
+    var b = new Boolean({}) // true
+    console.log(n)
+
+    // wlasne funkcje konstruujace - wraz z zabezpiczeniem na wypadek zapomnienia "new"
+
+    function Car( brand, model){
+        if ( (this instanceof Car) === false ){
+            return new Car(brand,model)
+        }
+        this.brand = brand 
+        this.model = model
+        this.info = function(){
+            console.log(this.brand, this.model)
+        }
+    }
+
+    const car3 = Car("Audi","A4")
+    const car4 = new Car("Mercedes", "C class")
+    console.log(car3)
+    console.log(car4)
+
+    // Object.create(proto) - tworzy obiekt, używa przekazanego obiektu jako prototypu nowego powstalego obiektu
+
+    let person = { name: "Seba", age: 28}
+
+    let obj2 = Object.create(person)
+    console.log(obj2.name) // Seba
+
+    let obj3 = Object.create(null) // obiekt bez prototypu tworzony
+
+    // dostep do wlasciwosci obiektu
+
+    let obj4 = {
+        name: "test",
+        size: 10,
+        log: function(){
+            console.log("asd")
+        }   
+    }
+
+    console.log(obj4.name)
+    console.log(obj4["size"])
+    obj4["log"]()
+
+    obj4.code = "XP"
+    obj4["code"] = "XD"
+    console.log(obj4.code)
+
+    delete obj4.code
+
+    // sprawdzenie istnienia wlasciwisci  - operator in oraz funkcja has own property
+
+    if("name" in obj4){
+        console.log("name in obj4")
+    }
+
+    if ("asd" in obj4){
+        console.log("asd in obj4") // nie wykona sie
+    }
+
+    if(obj4.hasOwnProperty("name")){
+        console.log("name in obj4")
+    }
+
+    obj4.hasOwnProperty("hasOwnProperty") // false bo dziedziczy z prototypu obiektu
+
+
+    /*
+     referencje do obiektow - obiekty zawsze sa przypisywane przez referencje np argument do funkcji
+     i podczas przypisana do zmiennej - prywitywy sa przekazywane przez wartosc
+    */ 
+
+    let num = 10
+    let num2 = num
+    num++
+    console.log(num,num2) // 10, 11 - dwie rozne liczby
+
+    // obiekty sa przypisywane przez referencje
+    let obj5 = { a: 10}
+    let data = obj5
+    data.a++
+    console.log(obj5)
+    console.log(data)
+    console.log(obj5 === data) // true
+
+    /* const a referencja do obiektu - stala jako obiekt odnosi sie do referencji, ktora nie moze zostac zmieniona 
+    ale wlasciwosc juz tak 
+    */
+
+    const a = 10 
+    // a = 20 - error Assign to cost variable
+
+    const f = { data: 10}
+    f.data = 20 // 20
+   // d = { info: 99 } // error Assign to cost variable
+ 
+
+   // enumeration object properties - obiekty moja miec wiele wlasciwosci, enumeracja umozliwia odczytanie wlasciwosci obiektu
+
+
+   var obj6 = {
+    name: "asd",
+    number: 2, 
+    log: function (){
+        console.log("log")
+    }
+   }
+
+   for( prop in obj6){
+    if(obj6.hasOwnProperty(prop)){
+        console.log(`property: ${prop} value: ${obj6[prop]}`)
+    }
+   }
+
+   // object keys zwraca tablice kluczy danego obiektu, bez dziedziczonych
+
+   let objKeys = Object.keys(obj6)
+   console.log(objKeys) // name,number, log 
+   for(let i=0; i< objKeys.length; i++){
+     console.log(`property ${objKeys[i]} wartosc ${ obj6[objKeys[i]] }`)
+   }
+
+   // object values - zwraca tablice wartosci danego obiektu. Od ES8
+
+   const objValues = Object.values(obj6)
+
+   for(let i=0; i< objValues.length; i++){
+     console.log(`i ${i} wartosc ${ objValues[i] }`)
+   }
+
+   // object entries - zwraca tablice par wlasciwosci i wartosci danego obiektu
+
+   const objEntries = Object.entries(obj6)
+   for( [key,value] of objEntries){
+      console.log(`key ${key} value ${value}`)
+   }
+
+   // objecy assign tworzy plytka kopie podanej instancjii obiektu do nowej
+
+   let clone = {info: 99}
+   let result = Object.assign(clone,obj6)
+
+   console.log(clone)
+   console.log(result)
+   console.log(clone === result) // true
+
+   Object.defineProperty(obj6, "newProp", {
+    value: 222222,
+    writable: true, 
+    configurable: true, //jezeli false to nie da sie usunac
+    enumerable: true
+   })
+
+   console.log(obj6.newProp) // 222222
+   delete obj6.newProp 
+   console.log(obj6.newProp) // undefined
+
+</script>    
+</body>
+</html>
