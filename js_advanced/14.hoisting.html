@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+   /* 
+     Hoisting to przeniesienie wszystkich deklaracji zmiennych oraz funkcji na poczatek funkcji
+     ale przypisania pozostaja na swoim miejscu
+   */ 
+
+   function test(){
+    console.log(data) // undefined
+    var data = 4 
+    console.log(data) // 4
+    /* to samo co
+        var data
+        console.log(data) // undefined
+        data = 4 
+        console.log(data) // 4
+    */
+   }
+   // hoisting a deklaracje funkcji - rowniez deklaracje funkcji sa przenoszone na poczatek
+   test2(5,4)
+
+   function test2( a, b ){
+    console.log(`wynik = ` + (a * b))
+   }
+
+   /* to samo co
+   function test2( a, b ){
+    console.log(`wynik = ` + (a * b))
+   }
+
+    test2(5,4)
+   */
+
+   /*  hoisting a wyrazenie funkcyjne - kiedy funkcja jest przyposana to zmiennej to deklracja zmiennej jest przeniosiona
+   na początek ale przyposanie pozostaje bez zmian co moze powodowac bledy
+   */
+
+   // exprTest(5,4) // Uncaught TypeError: exprTest is not a function
+
+   var exprTest = function( a, b ){
+    console.log(`wynik = ` + (a * b))
+   }
+
+   // hoisting to wylacznie przeniesie deklaracji na poczatek, przypisanie pozostaje na miejscu
+
+   var n = 10
+   var m = 5
+   console.log( n + m) // 
+
+   // ale ponizej jest NaN
+
+   var a = 5 
+   // var b; - przenoszeone tutaj i undefined
+   console.log(a + b) // 10 + undefined = NaN
+   var b = 10 
+
+   /* 
+    let, const = hoisting dotyczy rowniez deklaracji let oraz const ale w przeciwienstwie do var nie maja
+    automatycznie przypisanej wartosci undefined - let i const musza miec wartosc zanim zostana uzyte
+   */ 
+
+   console.log(y) // undefined
+   // console.log(z) - Uncaught ReferenceError: Cannot access 'z' before initialization
+   var y = 5 
+   let z = 5
+
+   /* temporal dead zone 
+ 
+   poza blokiem zmienna u moze byc uzywane ale gdy wewnatrz istnieje deklaracja let z tą sama nazwa to powstaje przestrzen,
+   gdzie u z poza bloku nie moze byc uzyte tzw TDZ
+
+   */ 
+
+   let u = 5 
+   {
+    // let u - wtedy 100 a window 5
+    u = 100
+    console.log(u) // 100
+   }
+   console.log(u) // 100 
+
+   /* 
+    let u = 5 
+    {
+        u = 100 // Uncaught ReferenceError: Cannot access 'u' before initialization
+        let u = 7
+        console.log(u) 
+    }
+    console.log(u)
+
+   */ 
+
+</script>    
+</body>
+</html>
