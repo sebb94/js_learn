@@ -198,6 +198,53 @@
    console.log(result)
    console.log(clone === result) // true
 
+   /* 
+    Deep copy Json.Strinify Json.parse
+
+    Aby stworzyć głęgokbią kopię która tworzy kopię wewnętrznych obietków możemy użyc funkcji do serializacji
+    obiektu do formatu json. Tworząc reprezentacje tekstową obiektu jako json i zniej nowy obiekt uzyskujemy deep copy
+    Nie jest idealna w przypadku np konwersji spowrotem sting na date
+
+   */ 
+
+   let source = {
+    str: "txt",
+    num: 10,
+    date: new Date(2030,12,12), 
+    obj: {
+        x:7
+    }
+   }
+
+   let copy = JSON.parse(JSON.stringify(source))
+
+   console.log(copy === source) // false - oddzielny obiekt
+   console.log(copy.obj === source.obj) // false - oddzielny obiekt
+   typeof source.date // object
+   typeof copy.date // string
+   console.log(source.date) // Sun Jan 12 2031 00:00:00 GMT+0100 (czas środkowoeuropejski standardowy)
+   console.log(copy.date) // 2031-01-11T23:00:00.000Z
+
+   // geter i seter - get - wywolywany gdy zmienna ma byc pobrana a seter gdy ma byc ustawiona
+
+   const user = {
+    _userName : null,
+    set name(n){
+        if (typeof name === "string"){
+            this.name = 'asd'
+        }
+    },
+    get name(){
+      return this.username
+    }
+   }
+
+   user.name = "seba"
+   console.log(user.name)
+  // console.log(user.username)
+
+  // defineprop
+
    Object.defineProperty(obj6, "newProp", {
     value: 222222,
     writable: true, 
