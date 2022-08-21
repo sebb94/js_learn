@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+     let source = {
+        str: "text",
+        num: 10,
+        flag: true, 
+        arr: [1,2,3],
+        date: new Date(2030,10,10), 
+        obj: {a:10, b:20}
+     }
+
+     let result = deepCopy(source)
+
+     function deepCopy(obj){
+        let copy 
+
+        if (obj === null || typeof obj !== "object"){
+            return obj 
+        }
+
+        if( obj instanceof Date){
+            copy = new Date()
+            copy.setTime(obj.getTime())
+            return copy
+        }
+
+        if( obj instanceof Array){
+            copy = []
+            for(let i=0;i<obj.length;i++){
+                copy[i] = deepCopy(obj[i])
+            }
+            return copy 
+        }
+
+        if (obj instanceof Object){
+            copy = {}
+            for (key in obj){
+                copy[key] = deepCopy( obj[key])
+            }
+
+            return copy
+        }
+     }
+     console.log(source)
+     console.log(result)
+     console.log("result object from deepCopy function same (address in memory) as source? " + (source === result)) // false 
+
+     let resultFromCopyByReference 
+     resultFromCopyByReference = source 
+     console.log(resultFromCopyByReference)
+     console.log("resultFromCopyByReference object same  as source? " + (source === resultFromCopyByReference)) // true
+   
+</script>    
+</body>
+</html>
