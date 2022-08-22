@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+  /* FUNKCJE
+   Argumenty:
+   a) prymitywy - przekazywane przez wartosc - kopie wartosci jako zmienne lokalne w obrebie funkcji 
+   b) obiekty - przez referencje - beda modyfikowane (te same obiekty)
+
+   arguments nie jest tablica ale ma zmienna length i mozna po indeksie przegladac argumenty
+  */ 
+
+  function foo(num,o,u){
+    num = 10;
+    o.data = 20
+    u = {name : "Kasia" }
+    console.log(arguments[0] == num ) // true
+    console.log(arguments[0]) // 10
+  }
+
+  let prymitive = 35
+  let obj = {data: "txt"}
+  let user = {name: "Ania"}
+
+  foo(prymitive,obj,user)
+ 
+  console.log(`prymityw: ${prymitive}`) // 35
+  console.log(`obj.data: ${obj.data}`) // 20 - obiekt zmieniony
+  console.log(`user.name: ${user.name}`) // Ania, referencja bez zmian bo jest przypisanie w funkcji - przypisuje nowy obiekt
+  // obiekty przekazywane przez referencje ale wewnatrz funkcji nie mozna jej zmienic przez przypisanie nowego obiektu
+ 
+ 
+
+</script>    
+</body>
+</html>
