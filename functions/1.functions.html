@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+  /* FUNKCJE
+  Składaja sie z nazwy, listy argumentów oraz ciała funkcji - opcjonalnie można zwrócic wartosc / obiekt za pomocą
+  słowa return, domyslnie jest to undefined. Funkcja to obietk - raz zdefiniowana moze byc wywolywana wiele razy.
+  Dwa sposoby na stworzenie funkcji;
+  */ 
+
+  // function statement (instrukcja funkcji)
+
+  function test(arg){
+    console.log(arg)
+  }
+
+  // function expression (wyrażenie funkcyjne)
+
+  var test = function(arg){
+    console.log(arg)
+  }
+
+  /* scope w funkcji - js ma zakres lokalny i globalny. Definujac funkcje tworzymy scope, przez co 
+  cokolwiek w środku nie jest dostepne poza funkcja
+  */ 
+
+  function test2(arg){
+    var localVar = 10;
+    console.log(arg, localVar)
+  }
+
+  test2(5) // 5,10 
+  // console.log(arg, localVar) - arg is not defined 
+
+  // funckje zagnieżdzone
+
+  let someGlobal = "txt"
+  function foo(arg){
+    let local = 5 
+    function nested(){
+        let c = 10;
+        console.log(someGlobal) // text
+        console.log(arg) // 99
+        console.log(local) // 5
+        console.log(c) // 10
+    }
+    nested()
+  }
+
+  foo(99)
+
+  //hoisting funkcji - podobnie jak u zmiennych zachodzi hoisting - przeniesienie delkaracji na poczatek zakresu
+
+  function test3(){
+    bar()
+    car()
+
+    function bar(){ console.log("bar") }
+    function car(){ console.log("car") }
+  }
+
+  test3()
+
+  // w przypadku wyrażenia funkcyjnego będzie hoisting - ale przypisanie ciała funkcji bedzie dalej w kodzie i bedzie blad
+ 
+  //var check; - hoisting
+  //check() // Uncaught TypeError: check is not a function
+  var check = function(){
+    console.log("check")
+  }
+
+ 
+
+</script>    
+</body>
+</html>
