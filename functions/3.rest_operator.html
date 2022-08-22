@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+  /* OPERATOR REST
+  Kolejny sposob to zebranie argumentow funkcji do tablicy za pomoca rest operatora
+  */ 
+
+  function sumAll(...params){
+    console.log("Parametry funkcji: " + params)
+    return params.reduce( function(acc,value){
+        console.log("Acc: " + acc + " value: " + value)
+        return acc + value
+    })
+  }
+
+  // Parametry funkcji 10,20,30,40
+  // 100
+  console.log( sumAll(10,20,30,40) )
+
+ 
+ 
+
+</script>    
+</body>
+</html>
