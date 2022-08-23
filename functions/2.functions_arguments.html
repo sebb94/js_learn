@@ -35,6 +35,61 @@
   console.log(`obj.data: ${obj.data}`) // 20 - obiekt zmieniony
   console.log(`user.name: ${user.name}`) // Ania, referencja bez zmian bo jest przypisanie w funkcji - przypisuje nowy obiekt
   // obiekty przekazywane przez referencje ale wewnatrz funkcji nie mozna jej zmienic przez przypisanie nowego obiektu
+
+
+  // Argumenty funkcji jako obiekt - przy wiekszej ilosc argumentow łatwiej przekazać obiekt
+
+  function foo2(data, info, str, num1, obj1, addr1, addr2){
+      consoole.log("foo2")
+  }
+
+  function bar(params){
+     if(params.hasOwnProperty("data")) console.log(params.data)
+     let info = params.hasOwnProperty("info") ? params.info : "domyslne info"
+     // sposob 2
+     // let info = params.info || "domyslne info"
+     let str = params.hasOwnProperty("str") ? params.info : "domyslny str"
+     // let str = params.info || "domyslny str"
+     console.log(info,str)
+  }
+
+  bar({data:22, info: "txt", addr1: "Krakow"})
+
+  // domyslnie argumenty funkcji
+
+  function makeConnection(
+    host = "https://google.com",
+    port = 80,
+    method = "HTTPS"
+  ){
+    console.log(`host ${host}, port ${port}, method ${method}`)
+  }
+
+  makeConnection('https://allegro.pl') // https://allegro.pl, 80, https
+  makeConnection('https://allegro.pl',443) // https://allegro.pl, 443, https
+
+  // domyslna wartoscia moze byc wynik wywolania funkcji
+
+  function foo3(arg = increment()){
+     console.log(arg)
+  }
+
+  let a = 0
+  function increment(){ return ++a }
+
+  foo3() // 1
+  foo3() // 2
+  foo3() // 3
+
+  // nie zadziala z wewnetrzna funkcją - będzie blad
+
+  function foo4( arg = check()){
+    function check(){
+      return "txt"
+    }
+  }
+
+  //foo4() // check is not defined - error
  
  
 
