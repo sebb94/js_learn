@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+/*funkcja strzałkowa - inny zapis wyrażenia funckyjnego - od ES2015
+
+wyrażenie funkcyjne 
+const foo = function (a,b) {
+    console.log(a,b)
+
+=> - to fat arrow, której mozna zapisac
+*/ 
+
+const arrowFoo = (a,b) => console.log(a,b)
+
+// przy 1 parametrze moze nie byc nawiasow
+
+const arrowFooo = a => console.log(a)
+
+arrowFooo(2)
+
+//zwracanie wartosci
+
+let test = (a,b) => { return a * b}
+// return mozna pominac wraz z nawiasami
+
+let multiply = (a,b) => a * b
+
+const splitStr = str=> str.split(",")
+let result = splitStr("1,2,3,4")
+console.log(result) // [1,2,3,4]
+
+// zwracanie obiektu  - przyklad 1 z return
+let makeObj = () => {
+    return {a:5, b:20} 
+}
+ 
+// zwracanie obiektu - pomijajac return - w nawiasach okraglych
+
+let makeObj2 = () => (
+    {a:5, b:20}
+)
+
+[2,4,8].forEach(function(a){
+    console.log(a)
+})
+
+[2,4,8].forEach( a => console.log(a))
+[2,4,8].reduce( (acc,val) => acc + val) //14
+
+const arr = [1,2,3,4,5,6,7,8,9,10]
+let dividedby3 = arr.filter ( v => v % 3 === 0)
+console.log(dividedby3) // [3,6,9]
+
+// obiekt arguments nie jest dostepny w funkcji strzalkowej - mozna jednak uzyc parametru rest
+
+const show = (...params) => console.log(params)
+
+show(10,20,30) // Array[3] [10, 20, 30]
+
+// funkcja strzalkowa nie moze byc uzyta jako konstruktor
+
+function foo5(){
+
+}
+const foooooo = new foo5() // dziala, nowy obiekt
+
+let bar3 = () => {}
+
+//const barrrr = new Bar() // TypeError - Bar is not construktor
+
+// fubkcja strzałkowa a this
+
+window.data = 99 // problem z this rozwiazuje funkcja strzalkowa
+
+function Car(){
+    this.data = "test"
+    this.printInfo = function(){
+        let that = this 
+        setTimeout(function (){ // this straci kontekts - bedzie window
+                 console.log("this.data " + this.data) // pokaze 99 z window
+                 console.log("that.data " + that.data ) // pokaze "test"
+        },1000)
+    }
+}
+
+const car = new Car()
+car.printInfo() // 99 | test
+
+// rozwiazanie problemu - arrow function
+
+function Car2(){
+    this.data = "test"
+    this.printInfo = function(){
+        setTimeout( () => { // this ma kontekst otoczenia
+                 console.log("this.data " + this.data) // pokaze "test"
+        },1000)
+    }
+}
+const car2 = new Car2()
+car2.printInfo() // test
+
+
+
+
+// zakres leksykalny - ostatni przyklad
+
+</script>    
+</body>
+</html>
