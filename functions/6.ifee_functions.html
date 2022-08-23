@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+/* IFFE function - funkcja natychmiastowa 
+Immediatly Invoked Function Expression jest anonimową funkcją wywołaną natychmiast po jej odczytaniu. Takie funkcje 
+ograniczają zakres użytych zmiennych/funkcji do funkcji natychmiastowej - chroni to skrypt przed kolizjami nazw.
+*/ 
+
+(function(){
+  var data = 10
+  function bar(){console.log(1)}
+}()); 
+
+// to samo - wywolanie przed i po ostatnim nawiasie
+
+(function() {
+    var data2 = 10 
+  function bar2(){console.log(2)}
+})();
+
+//console.log(data) // data is not defined
+//console.log(bar) // bar is not defined
+
+// funckja natychmiastowa zwracaja wartosc
+
+let result = ( function(){
+ var innerData = "innerData"
+ function innerFunc(){
+    console.log(innerData)
+ }
+ return {
+    data:10,
+    str: "text",
+    bar: innerFunc
+ };
+})
+();
+
+console.log(result)
+console.log(result.innerData) // undefined
+
+
+</script>    
+</body>
+</html>
