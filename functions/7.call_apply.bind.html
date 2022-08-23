@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+/* 
+
+Call - pozwala na wywolanie funkcji z podanym this oraz argumentem. This okresla obiekt jako kontekst, gdzie uzyty jest kod
+Apply - tak samo jak call - przyjmuje tablicę argumentów do funkcji
+Bind - wskazuje na stałe kontekst this wywołanej funkcji
+*/ 
+
+let obj = {
+    name: "Ola",
+    print: function(surname,city){
+       console.log(this.name, surname, city)
+       // return `${this.name} ${surname} ${city}`
+    }
+}
+let user = {name: "Rafał"}
+
+obj.print("Kot", "Wawa") // Ola Kot Wawa
+obj.print.call(user, "Kot","Krakow") // Rafal Kot Krakow
+obj.print.apply(user, ["Pies","Krakow"]) //Rafal Pies krakow 
+let rInfo = obj.print.bind(user,"Musk","Poznan") //Rafal Musk Poznan
+rInfo()
+
+//let v0 = obj.print("Kot", "Wawa") // Ola Kot Wawa
+//let v1 = obj.print.call(user, "Kot","Krakow") // Rafal Kot Krakow
+//let v2 = obj.print.apply(user, ["Pies","Krakow"]) //Rafal Pies krakow 
+//console.log(v0) // Ola Kot Wawa
+//console.log(v1) // Rafal Kot Krakow
+//console.log(v2) // Rafal Pies krakow
+//console.log(rInfo()) // Rafal Musk Poznan
+
+</script>    
+</body>
+</html>
