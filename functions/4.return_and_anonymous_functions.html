@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+// return - zwraca wartosc oraz przerywa dzialanie funkcji
+
+function foo() {} // zwraca undefined 
+function bar() { return } // undefined
+function foo2(){ return 1} // 1
+function bar2() {return {a: 10}} // {a: 10}
+//void check () // undefined
+
+function test(x){
+    if (x > 10) return "more than 10"
+    if (x <= 10) return "less or equal 10"
+}
+
+// funcke anonimowe
+
+// funkcja nazwana 
+function test2(){}
+test2()
+
+// funkcja anonimowa przypisana do zmiennej
+let test3 = function(){
+
+}
+test3()
+// typowy przyklad, uzycie funkcji jarko parametr do innej funkcji
+
+let result = [1,2,3,4,5].reduce(function(acc,value){
+    return acc + value
+})
+
+console.log(result) // 15
+
+// funkcje anonimowe mogą być również zwracane
+
+function test4(){
+    return function(value) { return value * 4}
+}
+
+let res = test4()
+res(4) // 16
+
+// deklaracja funkcji jest zapisywana w obiekcie window, ale wyrazenie funkcyjne przypisane
+// do let oraz const nie bedzie dostepne
+
+function f1() {}
+typeof window.f1 // function
+
+var f2 = function() {}
+typeof window.f2  // function
+
+let f3 = function() {} 
+typeof window.f3 // undefined
+
+const f4 = function() {} 
+typeof window.f4 // undefined
+
+</script>    
+</body>
+</html>
