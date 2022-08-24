@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+/* 
+  Namespace - przestrzenie nazw pozwalają na uniknięcie konfliktów nazy: zmiennych, obiektów oraz funkcji w globalnej
+  przestrzeni nazw. JS nie ma wbudowanej przestrzeni nazw ale mozna je symulować
+
+  Dodatkowo pozwalaja na lepszą organizację kodu, jego grupowanie oraz unikalną identyfikację jego poszczególnych części
+
+  Zamiast wielu globalnych zmiennych można stworzyć jedną dla naszej aplikacji co zmniejsza potencjalne problemy z innymi 
+  skryptami na stronie www
+*/ 
+
+
+// przyklad 1 - namespace jeden globalny obiekt
+
+let MYAPP1 = {
+    products: [],
+    Product: function(name,price){
+        this.name = name 
+        this.price = price 
+        this.printInfo = function(){ 
+          //  console.log(`${this.name} price: ${this.price}`)
+        }
+    },
+    addProduct: function(name,price){
+       let p = new MYAPP1.Product(name,price)
+       this.products.push(p)
+    }
+    }
+
+    MYAPP1.addProduct('Telefon',700)
+    MYAPP1.products[0].printInfo() // telefon price: 700
+
+// taki kod mozna rozszerzyc w innych plikach
+
+MYAPP1.utils = {
+    parseData: function() {}, 
+    toString: function() {}, 
+    import: function() {}, 
+}
+
+MYAPP1.config = {
+    laguage: "English",
+    theme: { skin: "dark"},
+    changeTheme: function(){ }
+}
+
+// jezeli robzijamy plik warto upewnic sie, że obiekt MYAPP1 istnieje
+// let MYAPP1 = MYAPP1 || {} 
+
+
+
+// przyklad 2 - Automatyczne zagniezdzone przestrzenie nazw
+let MYAPP2 = {
+
+}
+function extendNS(ns, nsStr){
+    let nsParts = nsStr.split(".")
+    let parent = ns 
+    if(nsParts[0] == "MYAPP2") nsParts = nsParts.slice(1)
+    for(let i=0;i < nsParts.length; i++){
+        let nsName = nsParts[i]
+        if (typeof parent[nsName] == "undefined"){
+            parent[nsName] = {}
+        }
+    parent = parent[nsName]
+    }
+    return parent
+}
+
+//let math = extendNS(MYAPP2, "MYAPP2.utils.math")
+//console.log(math)
+
+// przyklad 3 - funckje natychmiastowe jako modul
+
+let namespace = function(){
+    let somePrivateStr = "Ala ma kota"
+    let privateData = 99 
+    function privateMethod1(){
+        return somePrivateStr 
+    }
+    let privateConfig = {language: "English"}
+    function privateMethod2(){ return privateData}
+
+    return {
+     publicConfig: privateConfig,
+     publicGetStr: privateMethod1,
+     utils: {
+        publicMethod: privateMethod2 
+     }
+    }
+}();
+
+// namespace.publicConfig.language = "Polish"
+// console.log(namespace.publicGetStr()) 
+// console.log(namespace.utils.publicMethod())
+// console.log(namespace.privateData) // undefined
+// console.log(namespace)
+
+
+// przyklad 4 - funkcje natychmiastowe - namespace przekazywany jako obiekt
+
+
+// (function(namespace2){
+//   let privData = 12345
+//   function privMethod1(){ return privData}
+
+//   namespace2.publicProp = 7
+//   namespace2.getData = privMethod1
+//   namespace2.setData = function(newData){
+//     privData = newData
+//   }
+
+// })(window.namespace2 = window.namespace2 || {})
+
+// console.log(window.namespace2)
+// namespace2.getData()
+// namespace2.setData(100)
+
+
+(function(namespace4){
+   let privArr = [1,2,3]
+   namespace4.getArr = function() { return privArr}
+   namespace4.addElement = function(el) { privArr.push(el)}
+})(window.namespace4 = window.namespace4 || {});
+
+// przyklad 5
+
+// console.log(namespace4)
+// console.log(namespace4.getArr()) // [1,2,3]
+ //namespace4.addElement(100)
+// console.log(namespace4.getArr()) // [1,2,3,100]
+// console.log(namespace4.privArr) // undefined
+
+
+// nowe wywolanie funkcji natychmiastowej - jak zmienimy nazwe metody i nie damy privArr - nie bedzie dzialalo z showArr
+// ale z getArr juz tak
+(function(namespace4){
+   namespace4.showArr = function() { return privArr}
+})(window.namespace4 = window.namespace4 || {});
+
+// console.log(namespace4.getArr()) // [1,2,3]
+// console.log(namespace4.showArr()) // nie bedzie dzialalo
+</script>    
+</body>
+</html>
