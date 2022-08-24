@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>asdasd</p>
+<script>
+
+/* 
+  This w JS wskazuje na tzw. execution context czyli kontekst w którym wywołany jest kod. Podstawowym kontekstem
+  jest globalny kontekst jesli kod nie znajduje sie w funkcji
+*/ 
+
+console.log(this) // wyswietli window
+
+// globalny kontekst też mozliwy globalThis
+console.log(globalThis === window)  // true
+console.log(this === window)  // true
+console.log(this === globalThis) // true
+
+/* 
+Czym jest this w funkcji zależy od tego ja funkcja została wywołana - jeśli funckja nie jest częścią obiektu to wywołana
+ ma this ustawiony obiekt globalny
+*/ 
+
+function bar(){
+    console.log("bar this: " + this) // bar this: [object Object]
+    console.log(this === window) // true
+}
+
+// w strict mode bedzie undefined
+
+function bar2(){
+    "use strict"
+    console.log("bar this: " + this) // bar this: undefined
+    console.log(this === window) // false
+}
+
+bar()
+bar2()
+
+// this - kontekst funkcji z obiektu - funkcja wyłowywana w kontekście obietu, będzie wskazywała na obiekt
+
+const person = {
+    name: "Jan Nowak",
+    city: "Warszawa",
+    info: function(){
+        //this wskazuje na obiekt
+        console.log(this.name, this.city)
+    }
+}
+
+person.info() // Jan Nowak Warszawa
+
+// this - prywatna funkcja - this wskazuje na window
+
+const car = {
+    name: "Dodge",
+    year: 1970,
+    printInfo: function(){
+        function showYear(){
+            console.log(this.year + " year") // this.year - undefined
+            console.log(this === window + " this === window") // true
+        }
+        console.log(this.name, this.year) // Dodge 1970
+    }
+}
+
+car.printInfo()
+
+const person2 = {
+    name: "Paweł Nowak",
+    city: "Krakow", 
+    info: function(streetCode){
+        // this wskazuje na obiekt person
+        console.log(this.name, this.city, streetCode)
+    }
+}
+
+person2.info("00-123") // Paweł Nowak Krakow 00-123
+
+let ania = {name: "Ania Kowalska", city: "Warszawa"}
+person2.info.call(ania, "05-555") // Ania Kowalska Warszawa 05-555
+person2.info.call(ania, ["06-666"]) // Ania Kowalska Warszawa 06-666
+
+let aniaPrintMethod = person2.info.bind(ania,"01-111")
+aniaPrintMethod() // Ania Kowalska Warszawa 01-111
+
+
+// this a funkcje nasłuchujące zdarzenia - funckja addEventListeneter wywoluje funkcje, gdy nastpi zdarzenie - this wskaze
+// klikniety element
+
+let body = document.getElementsByTagName("body")[0]
+let body2 = document.getElementsByTagName("body")[0]
+let body3 = document.getElementsByTagName("body")[0]
+let body4 = document.getElementsByTagName("body")[0]
+console.log(body)
+
+body.addEventListener("click",function(e){
+    // this wskazuje na klikniety element - body dokumentu html
+    console.log(this)
+})
+
+// this mozna byc utracone przy uzyciu setTimeout
+
+body2.addEventListener("click",function(e){
+    // this wskazuje na klikniety element - body dokumentu html
+    // bedzie to wywowalnie w petli zdarzen w innym kontekcie - bedzie true
+    setTimeout(function(){
+        console.log(this === window) // bedzie true
+    },1000)
+})
+
+// wartosc mozna przechowac np w self
+
+body3.addEventListener("click",function(e){
+    let self = this // przechowanie referencji do this( body ) dla setTimeOut
+
+    // wywoła sie po sekundzie ta funkcja
+    setTimeout(function(){
+        console.log(self === window) // bedzie false
+        console.log(self) // wskazuje na body
+    },1000)
+})
+
+// ale lepszym sposobem jest arrow function gdzie this jest ustawiany w sposob leksykalny - zalezny od miejsca w kodzie a nie
+// w miejscu w pamieci
+
+body4.addEventListener("click",function(e){
+  
+    // wywoła sie po sekundzie ta funkcja
+    setTimeout(() => {
+        console.log(this === window) // bedzie false
+        console.log(this) // wskazuje na body
+    },1000)
+})
+
+
+// This a konstruktor - wywoływanie konstruktora za pomocą new ustawia this w kontekście nowo tworzeonego obiektu
+// dzieki czemu możemy ustawić jego zmienne oraz funkcje
+
+function Car(brand,name){
+ this.brand = brand 
+ this.name = name 
+ this.printInfo = function(){
+    console.log(this.brand, this.name)
+ }
+}
+
+let dogde = new Car("Dogde","Viper")
+dogde.printInfo() // Dodgde Viper
+
+// wywolanie konstrukora bez new ustawia this na obiekt globalny, przez co mozna zasmiecic przestrzen
+
+let ford = Car("Ford","Mustang")
+ford.printInfo() // ford is undefined
+console.log(window.brand) // Ford
+console.log(window.name) // Mustang
+
+//przypisanie funkcji z konstruktora oraz wywołanie jej wyrzuci this z kontekstu obiektu
+
+let pontiac = new Car("Pontiac","Camaro")
+pontiac.printInfo() // Pontiac Camaro
+let showCarInfo = pontiac.printInfo() // przypisanie funkcji do zmiennej
+showCarInfo() // undefined <empty string>
+showCarInfo.apply(pontiac) // Pontiac Camaro - prawidłowo
+
+
+</script>    
+</body>
+</html>
