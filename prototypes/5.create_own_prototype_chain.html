@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* 
+   Tworzenie własnego łanucha prototypow
+ */
+
+  function Vechicle(){
+    this.start = function(){
+        console.log("Engine Start...")
+    }
+    this.typeOfWheels = "Circle"
+  }
+
+  function Car(){
+    this.hasLights = true 
+    this.getColor = function(){
+        return this.color 
+    }
+    this.setColor = function(color){
+        this.color = color
+        return color
+    }
+  }
+
+  function Hatchback(color,fuel){
+    this.color = color
+    this.fuel = fuel 
+    this.numOfDoors = 4;
+    this.power = "150KM"
+  }
+
+  Car.prototype = new Vechicle()
+  Hatchback.prototype = new Car()
+  Car.prototype.constructor = Car 
+  Hatchback.prototype.constructor = Hatchback
+
+  let auris = new Hatchback('Red','Diesel')
+  auris.setColor('Blue')
+  console.log(auris.getColor())
+  auris.start()
+  console.log(auris.typeOfWheels)
+  console.log(auris.fuel)
+  console.log(auris)
+
+  console.log('----')
+  console.log(auris instanceof Hatchback)
+  console.log(auris instanceof Vechicle)
+  console.log(auris instanceof Car)
+ 
+
+</script>    
+</body>
+</html>
