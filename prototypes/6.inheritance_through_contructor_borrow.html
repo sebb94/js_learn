@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* 
+   Dziedziczenie przez pożyczenie konstruktora
+ */
+
+ function Machine(name,vendor){
+    this.name = name
+    this.vendor = vendor 
+    this.printInfo = function() {
+        console.log(this.name, this.vendor)
+    }
+  } 
+
+  Machine.prototype.getVendor = function(){
+        return this.vendor
+  }
+
+  function Vechicle(name,vendor,type,numWheels){
+    // wywołanie konstruktora Machine na nowo tworzonym obiekcie - kopiuje wlasciwosci, nie ma referencji!!
+    Machine.call(this,name,vendor)
+    this.type = type 
+    this.numWheels = numWheels
+  }
+
+  let car1 = new Vechicle("raptor","ford","truck",4)
+  car1.printInfo() // raptor ford
+  //car1.getVendor() // getVendor is not a fucntion - prototyp nie został odziedzicony
+
+  // aby naprawic 
+  Vechicle.prototype = new Machine()
+  console.log(Vechicle.prototype.constuctor) // Machine()...
+  Vechicle.prototype.constuctor = Vechicle // na Vechicle
+
+  let car2 = new Vechicle("f150","ford","truck",4)
+  car2.printInfo() // raptor ford
+  car2.getVendor() // ford
+
+
+
+
+
+ 
+ 
+
+</script>    
+</body>
+</html>
