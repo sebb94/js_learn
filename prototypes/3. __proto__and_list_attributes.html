@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* 
+  __proto__ wskazuje na [[Prototype]] do którego nie ma dostępu z poziomu JS'a 
+
+  Właściwość prototype jest dostępna wyłącznie dla funkcji konstruujących obiekt wraz z new, czyli dla konstruktorów.
+  Tak stworzona nowa instancja obiektu będzie miałą refenrecję do prototypu funkcji konstruującej poprzez __proto__. Dzięki
+  temu dodając metodę czy zmienną do protypu konstruktora to będą widoczne we wszystkich instancjach.
+  */
+
+  function Thing(name){
+    // konstruktor Thing
+    this.name = name
+  }
+
+  Thing.prototype.year = 2000
+  Thing.prototype.printInfo = function() {
+    console.log(this.name, this.year)
+  }
+
+  let tel = new Thing("tel") // tel 2000
+ 
+  console.log(tel.constructor.prototype.year) // 2000
+  console.log(tel.__proto__.year) // 2000 - nie zalecane
+  console.log(tel.constructor.prototype.year === tel.__proto__.year) // true
+
+  // listowanie właściwosci - włączajac prototyp
+  for(prop in tel){
+    console.log(prop) // name,year, printinfo
+  }
+
+  // listowanie tylko z obiektu
+  for(prop in tel){
+    if(tel.hasOwnProperty(prop)) console.log(prop) // name
+  }
+
+ 
+
+</script>    
+</body>
+</html>
