@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* PROTOTYP
+  JS nie ma klas jak inne jezyki programowania - ale ma prototypy które umożliwiają dziedziczenie. Zamiast dziedziczenia
+  na bazie klas mamy dziedziczenie prototypowe.
+
+  Dziedziczenie to współdzielenie pewnych funkcjonalności np metody z innych obiektów
+
+  Wszystko w JS opórcz typów prostych jest obiektem, nawet funkcje. Każda funkcja posiada również metody np.
+  call, apply oraz właściwość prototype
+
+  Domyślnie prototyp jest pustym obiektem stworzonym podczas definicji funkcji
+  Każda instancja stworzona za pomocą tego samego konstruktora będzie współdzieliła ten sam prototyp
+  */
+
+  function Thing(name){
+    // konstruktor Thing
+    this.name = name
+  }
+
+  Thing.prototype.year = 2000
+  Thing.prototype.printInfo = function() {
+    console.log(this.name, this.year)
+  }
+
+  let tel = new Thing("tel") // tel 2000
+  tel.printInfo()
+
+  let tv = new Thing("tv")
+  tv.printInfo() // tv 2000
+
+  // niżej można dodać właściwości i dalej bedą dostepne
+
+  Thing.prototype.data = {str: "text"}
+  Thing.prototype.weight = 50
+
+  console.log(tv.data, tv.weight)
+  console.log(tel.data, tel.weight)
+  // pola oraz metody z prototype nie są kopiami - są to referencje
+  console.log(tel.data === tv.data, tv.weight === tel.weight)
+
+  /*
+   SKRYPT
+   - Interpreter JS spotka odwołanie do właściwości weight
+   - sprawdza czy weight istnieje w tel - jeśli tak to użyta zostanie wartosc tego obiektu
+   - tel nie ma weight dlatego interpreter poszuka jej w prototype, który jest w konstruktorze tego obiektu i użyje
+   jej wartosci tel.constructor.prototype.weight
+
+   UWAGA - jeżeli w prototypie nie byłoby weight to będzie szukana dalej w łancuhu prototypów, ponieważ
+   prototype też jest obiektem, równiez ma konjstruktor, który ma swój prototype. Przeszukany będzie łancuch prototypów, aż
+   interpreter dotrze do wbidowanego obiektu Object, który jest rodzicem wszystkich obiektów
+
+   tel.constructor.prototype.constructor.prototype
+  */
+
+
+
+
+ 
+
+</script>    
+</body>
+</html>
