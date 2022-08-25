@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* PROTOTYP
+  JS nie ma klas jak inne jezyki programowania - ale ma prototypy które umożliwiają dziedziczenie. Zamiast dziedziczenia
+  na bazie klas mamy dziedziczenie prototypowe.
+
+  Dziedziczenie to współdzielenie pewnych funkcjonalności np metody z innych obiektów
+
+  Wszystko w JS opórcz typów prostych jest obiektem, nawet funkcje. Każda funkcja posiada również metody np.
+  call, apply oraz właściwość prototype
+
+  Domyślnie prototyp jest pustym obiektem stworzonym podczas definicji funkcji
+  Każda instancja stworzona za pomocą tego samego konstruktora będzie współdzieliła ten sam prototyp
+  */
+
+  function Thing(name){
+    // konstruktor Thing
+    this.name = name
+  }
+
+  Thing.prototype.year = 2000
+  Thing.prototype.printInfo = function() {
+    console.log(this.name, this.year)
+  }
+
+  let tel = new Thing("tel") // tel 2000
+  tel.printInfo()
+
+  let tv = new Thing("tv")
+  tv.printInfo() // tv 2000
+
+  // niżej można dodać właściwości i dalej bedą dostepne
+
+  tel.year = 2005
+  tel.printInfo() // tel 2005 // bo najpierw sprawdza w instancji obiektu wiec na patrzy na prototyp
+  tv.printInfo() // tv 2000
+
+  delete tel.year // usuniecie - znowu patrzy w prototyp
+
+  tel.printInfo() // tel 2000
+  tv.printInfo() // tv 2000
+
+  Thing.prototype.toString = function(){
+    console.log("To string proto")
+  }
+  tv.toString = function(){
+    console.log("To string tv")
+  }
+  tel.toString()
+  tv.toString()
+ 
+
+
+ 
+
+</script>    
+</body>
+</html>
