@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+ /* 
+   Object.create(proto,properties) tworzy nowy obiekt wraz z prototypem
+ */
+
+ const player = {
+    name: "uknown",
+    login: function(){ console.log(this.name + " zalogowany") },
+    logout: function() { console.log(this.name)}, 
+    printInfo: function() {( console.log(this.name,this.country,this.points)) }
+ }
+
+ // bot ma prototyp z obiektem player oraz dodane name i country jako wlasciwosci
+
+ let bot = Object.create(player, {
+    name: { value: "cpu player 1"},
+    country: { value: "n/a"}
+ })
+
+ bot.points = 10;
+ bot.login()
+ bot.printInfo()
+
+</script>    
+</body>
+</html>
