@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+  /* DOMKNIĘCIA
+  Domknięcie to zasięg stworzony przez funkcję wraz z otaczajacymi ją środowiskiem czyli zmiennymi
+  oraz innym funkcjami, które oddzielone są od reszty kodu
+  */ 
+
+  let b = 99; // zmienna globalna b
+  function foo(){
+    let b = 10 // zmianna lokalna b
+    console.log("b:"+b) // odwołanie się do loklanego b
+  }
+
+  foo() // 10
+
+  /* 
+  Funkcja foo ma swoje własne środowisko z zmienną b, która jest oddzielona od globalnej przestrzeni nazw,
+  nazwa zmiennej się porkywa więc wybrana zostanie lokalna zmienna o wartości 10 w console.log. Funkcja foo jest 
+  domknięciem, bo tworzy oddzielne środowisko dla zwartych w niej zmiennych oraz wewnętrzynch funkcji
+
+  Domknięcie jest to zasięg stworzony przez funkcję wraz z otaczającym ją środowiskiem czyli zmiennymi
+  oraz innymi funkcjami, które oddzielone są razem od reszty kodu.
+
+  Wewnętrz funkcji foo możemy uzyskać dostęp do zmiennej globalnej c i ją zmienić, jeśli nie użyjemy z nią 
+  var,let czy const co stworzyłoby osobną lokalną zmienną fukcji
+  */
+
+  let a1 = 99
+  let b1 = 50
+  let c1 = 10
+
+  function bar(){
+    var a1= 999
+    let b1= 888
+    console.log(a1,b1,c1) // 999,888,10
+  }
+
+  bar()
+
+  /* domknięcia to dostęp do scope funkcji, która otacza wewnętrzą funkcję - ale nie w 2 stronę - w outer funkcji nie 
+  będzie dostępu do wewnętrznej zmiennej 
+  */ 
+
+  function outer(){
+    var c = 10
+        function inner(){
+          var d = 100
+          console.log(c,d)
+        }
+      //console.log(d) // 1.clousers.html:59 Uncaught ReferenceError: d is not defined
+      return inner 
+  }
+
+ const testInner = outer()
+ testInner()
+
+ // dostepne zmienne przez domkniecie nada sa w pamieci i mozna je zmieniac
+
+ function lib(){
+  let num = 1
+  function test(){
+    console.log("Wywolanie num: " + num)
+    num++
+  }
+  return test 
+ }
+
+ const show = lib()
+ console.dir(show)
+ show() // wywolanie num: 1
+ show()  // wywolanie num 2
+
+   /* domknięcia pozwalają na tzw currying czyli rozkładanie fumkcji z wieloma argumentami na funkcje z
+   pojedynczymi argumentami. Każda funkcja zwraca nową funkcję przyjmującą jeden parametr
+  */ 
+
+  function test2(x){
+    return function(y){
+      console.log(x+y)
+    }
+  }
+let add10 = test2(10) // x bedzie jako 10 i zwrocona jako funkcja
+
+add10(7) // x będzie 7 + dodane 10 = 17
+add10(20) // 30
+
+/* 
+ domknięcia - clousers pozwalają na zdefiniowanie prywatnych i publicznych zmiennych oraz funkcji, 
+ co nie jest normalnie dostępne w JS ale można emulowac ten efekt
+*/ 
+
+ function CarDetails(){
+  let privName = "unknown"
+  
+  function setNamePriv(newName){
+    privName = newName
+  }
+
+  function getNamePriv(){
+    return privName
+  }
+
+  return {
+    setName: setNamePriv,
+    getName: getNamePriv,
+    data:10 
+  }
+
+ }
+
+ let car = CarDetails()
+ console.log(car.getName())// unknown
+ car.setName("Toyota")
+ console.log(car.getName() )// Toyota
+ console.log(car.data) // 10
+ console.log(car.privName) // undefined (prywatna)
+
+</script>    
+</body>
+</html>
