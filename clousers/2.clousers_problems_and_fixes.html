@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ 
+  /* DOMKNIĘCIA - problemy i rozwiazania
+   Problemy z domknięciami mogą pojawić się, gdy zapomnimy że closers pamieta referencje do zmiennej a nie jej wartosc
+   Pętla przekaże funkcję do wywołania po pól sekundy za pomogą setTimeout, gdzie w środku wywołana zostanie console.log
+   z wartością zmiennej i, trzykrotnie
+
+   Domknięcie pamięta referencję do zmiennej i a nie jej wartosci dlatego po 500 ms wywola sie konsole log i za kazdym
+   razem wskaże 3
+  */ 
+
+  for(var i=0; i<3; i++){
+    setTimeout(function(){
+        console.log(i)
+    }, 500);
+  } // 3 3 3
+
+  // rozwiazaniem jest uzycie let 
+
+  for(let i=0; i<3; i++){
+    setTimeout(function(){
+        console.log(i)
+    }, 500);
+  } // 0 1 2
+
+  // kojenym rozwiazaniem jest uzycoe funkcji natychmiastowej
+
+  for(var i=0; i<3; i++){
+   (function(a){ // wartosc i bedzie przekazywana jako argument
+    setTimeout(function(){
+        console.log(a)
+    }, 500);
+  })(i) // przkazywanie wartosci i do wywolywanej funkcji co tworzy nowy clauser
+
+  } // 0 1 2
+
+</script>    
+</body>
+</html>
