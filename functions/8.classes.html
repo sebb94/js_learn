@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+class Vechicle{
+    constructor(){
+        this.numOfWheels = 4
+    }
+    start() {
+        console.log("Engine start...")
+    }
+    stop(){
+        console.log("Engine stoped...")
+    }
+}
+
+class Car extends Vechicle{
+    constructor(name,color,type){
+        super()
+        this.name = name 
+        this.color = color 
+        this.type = type 
+    }
+
+    carOpen() {
+        console.log(this.name + " car open!")
+    }
+
+    carInfo(){
+        console.log("This car has: " + this.numOfWheels + " doors")
+    }
+}
+
+let auris = new Car("Auris","Red","Hatchback",4)
+auris.carOpen()
+auris.carInfo()
+console.log(auris)
+
+</script>    
+</body>
+</html>
