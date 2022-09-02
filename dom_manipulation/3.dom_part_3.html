@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="email" name="email">
+        <input type="text" name="firstName" class="asd3">
+        <input type="number" name="pin">
+    </form>
+
+    </ul>
+</body>
+
+<script>
+    let el = document.getElementById('myForm')
+
+   console.log(el.action)
+   console.log(el.reset())
+   console.log(el.getElementsByTagName('input'))
+   console.log(el.childNodes)
+   el.addEventListener('click',function(e){
+    })
+
+    // html collection nie jest tablica - nie mozna uzyc forEach
+    const inputs = document.getElementsByTagName('input')
+
+    Array.from(inputs).forEach(element =>{
+        console.log(element.name)
+    })
+
+    // nodelista posiada for each
+    const inputs2 = document.querySelectorAll('input')
+
+    inputs2.forEach(element => {
+        console.log(element.name)
+    });
+
+
+</script>
+
+</html>
