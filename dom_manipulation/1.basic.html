@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><!-- komentarz-->
+    <h4>heading</h4>
+    <a href="#">link</a>
+    <p>paragraf</p>
+    <div>some text</div>
+    <div>some text</div>
+    <div>some text</div>
+    <div>some text</div>
+ 
+</body>
+
+<script>
+    // sposoby na lapanie elemetu
+   console.log(document.getElementsByTagName("body")[0])
+   console.log(document.getElementsByTagName("body").item(0))
+
+    // odwolanie sie do diva -i zmiana koloru
+    console.log(document.getElementsByTagName("div")[0].style.background = 'red')
+
+   // odwolanie sie do rodzica diva - body i zmiana koloru 
+   console.log(document.getElementsByTagName("div")[0].parentNode.style.background = 'orange')
+
+   // firstChild i lastChild
+   console.log(document.getElementsByTagName("body")[0].firstChild) //komentarz - potem white space - dopiero potem <h4>
+   console.log(document.getElementsByTagName("body")[0].lastChild) // script tag
+   console.log(document.getElementsByTagName("body")[0].lastChild.nodeType) // https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+   console.log(document.getElementsByTagName("body")[0].firstChild.nodeType)
+
+   //firstElement i lastElement
+   console.log(document.getElementsByTagName("body")[0].firstElementChild) // h4
+   console.log(document.getElementsByTagName("body")[0].lastElementChild) // script (live server)
+
+   //previous sibilnig i next sibling
+   console.log(document.getElementsByTagName("p")[0].previousSibling.nodeValue) // znak nowej linii
+   console.log(document.getElementsByTagName("p")[0].previousElementSibling.style = "border: 11px dotted green") // a
+   console.log(document.getElementsByTagName("p")[0].nextSibling.nodeValue) // znak nowej linii
+   console.log(document.getElementsByTagName("p")[0].nextElementSibling.style = "border: 11px dotted black") // div
+
+   // node lista
+   console.log(document.getElementsByTagName("body")[0].childNodes)
+
+</script>
+
+</html>
