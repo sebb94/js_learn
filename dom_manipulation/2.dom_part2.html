@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><!-- komentarz-->
+    <h4>heading</h4>
+    <a href="#">link</a>
+    <p>paragraf</p>
+    <div id="div1">some text</div>
+    <div id="div2">some text</div>
+    <div>some text</div>
+    <div class="asd">some text</div>
+    <div class="asd">some text</div>
+
+    <p>paragraf 1</p>
+    <p>paragraf 2</p>
+    <p>paragraf 3</p>
+    <p class="asd3">paragraf 4</p>
+ 
+    <form class="myForm">
+        <input type="email" name="email">
+        <input type="text" name="firstName" class="asd3">
+        <input type="number">
+    </form>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+</body>
+
+<script>
+    // sposoby na lapanie elemetu - getElementById
+    console.log(document.getElementById('div2').style = "border: 5px dotted aqua")
+
+    // dostep do grupy elementow
+    console.log(document.getElementsByTagName('div')) // HTML COLLECTION
+    console.log(document.getElementsByTagName('div')[3].style = "border: 5px dotted red") 
+    console.log(document.getElementsByTagName('div')[4].style = "border: 5px dotted green") 
+
+    //
+    console.log(document.querySelectorAll('.asd')) // NODE LIST COLLECTION
+    console.log(document.querySelector('div').style = "border: 5px dotted black") // pierwszy
+    let element = document.querySelectorAll('p')
+
+    for(let el of element){
+        el.style.border = "1px solid green"
+    }
+
+    //laczenie - lanuch
+    console.log(document.getElementsByTagName('form')[0].style = "background: red")
+    console.log(document.getElementsByName('email')[0].style = "background: green")
+    console.log(document.getElementsByTagName('form')[0].getElementsByClassName('asd3')[0].style = "background: yellow")
+
+    // element matches
+
+    let list = document.querySelectorAll('ul > li')
+    console.log(list)
+    for(let el of list){
+       if (el.matches('ul > li:last-child')){
+           el.style = "border: 5px solid yellow"
+       }
+    }
+  
+
+</script>
+
+</html>
