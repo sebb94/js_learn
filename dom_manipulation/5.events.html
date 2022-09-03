@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body * {
+        margin: 10px;
+        border: 1px solid red
+    }
+</style>
+
+<body id="body">
+    <div id="div1">div
+        <form id="myForm" class="c1 c2 c3">form
+           input<input id="input1" type="email" name="email" onclick="inputClicked(event)">
+            <input id="input2" type="text" name="firstName" class="asd3">
+            <input id="input3" type="number" name="pin">
+        </form>
+    </div>
+</body>
+<script>
+  function inputClicked(e){
+    console.log(e)
+    console.log('input clicked')
+  }
+
+  function onKeyDown(event){
+     console.log(event)
+     console.log("klawisz klikniety " + event.key)
+  }
+
+  function mouseMove(event){
+     console.log(event)
+     console.log("mouseMove ")
+     body.removeEventListener("mousemove", mouseMove) // wykona sie raz
+  }
+
+  let i2 = document.getElementById('input2')
+  i2.onclick = function inputClicked2(e){
+    console.log(e)
+    console.log('input2 clicked')
+  }
+
+  let body = document.getElementById('body')
+  body.addEventListener("keydown", onKeyDown)
+  body.addEventListener("mousemove", mouseMove)
+
+  for(let el of document.querySelectorAll("*")){
+    el.addEventListener("click", e => 
+        console.log("Capturing:" + el.tagName), true);
+
+    el.addEventListener("click", e => 
+        console.log("Bubbling:" + el.tagName));
+        e.stopPropagation()
+   }
+
+</script>
+
+</html>
