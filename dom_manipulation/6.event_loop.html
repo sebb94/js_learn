@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+ /* 
+  1. Wykonywane jest wszystko ze stosu wywołań, aż będzie pusty
+  2. Wykonywane jest wszystko z kolejki mikrozadań, aż będzie pusta
+  3. Wykonywana jest cała kolejka renderowana
+  4. Nastepuje sprawdzenie czy stos wywołań jest pusty, jeśli tak pobierany jest pierwszy callback
+  z kolejki zadań na stos wywołań i wykonywany. Nastepuje przejscie do punktu 1.
+ */ 
+
+  // nawet z setTimeout 0 wykona sie najpierw msg3 a potem msg2
+//  console.log("msg1")
+//  setTimeout(function (){
+//     console.log("msg2")
+//  },0)
+//  console.log("msg3")
+ // msg 1
+ // msg 3
+ // msg 2
+
+ // callback musi poczekać, aż proste instrukcje zostaną wykonane nawet jak jest milionowa petla
+ console.log("msg1")
+ setTimeout(function (){
+ console.log("msg2")
+ },0)
+ let a = 0;
+ for(let i = 1; i< 50000;i++){
+   a++
+ }
+ console.log("msg3")
+  // msg 1
+ // msg 3
+ // msg 2
+</script>
+
+
+
+
+</html>
