@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+    /* 1. Czym jest funkcja strzałkowa?
+
+    Funkcja arrow (ES6) tu uproszczona funkcja nie posiadająca this, arguments czy super - 
+    nie może być konstruktorem i najlepiej sprawdza się jako skrócony zapis zwykłych 
+    funkcji np. przekazywanych jako argument
+    */
+    let add = (x, y) => x + y
+    let multiply = (a, b) => a * b
+    add(1, 3) // 4
+    multiply(2, 5) // 10
+
+    let arr = [1, 2, 3, 4, 5]
+    arr.forEach((a) => console.log(a)) //1,2,3,4,5...
+
+    /* 2. Jaki jest najszybszy sposób na pobranie elementów z drzewa dom?
+
+    Jeżeli mamy identyfikator elemetu to użycie getElementById będzie najszybsze, ale posiadanie zbyt wielu id nie jest
+    najlepszym roziwązaniem ze względu na powtarzanie styli.
+    Klasy css są drugim najszybszym sposobem na wybranie elemetu np poprzez getElementByClassName()
+    Poniżej randking od najszybszej metody::
+     - id #main
+     - class .box
+     - siblings div + p
+     - childrens div > p
+     - potomek div span
+     - uniwersalny selektor * 
+     - artrybuty div[data-type="gallery"]
+     - psedudoklasy div:first-child
+
+    */
+
+
+    /*  3. Czym jest let. jaka jest różnica między let a var?
+
+    LET - wersja ES6 wprowadziła słowa kluczowe let oraz const, które deklarują zmienną oraz stałą o zasięgu blokowym
+    przez co ich zasięg jest ograniczony do bloku czy też wyrażenie w którym są używane. Natomiast zmienne deklarowane 
+    przez var mają zasięg globalny, chyba, że byly zadeklarowane w funkcji przez co miały lokalny zasięg
+
+    Let                                              | Var
+    - wprowadzone w ES6 razem z const                |  - od początku JS'a
+    - ma zasięg blokowy                              |  - ma zasięg funkcyjny
+    - hoisting dotyczy let ale nie są                |  - zmiennych var dotyczy hoisting, przez co są inicjalizowane
+      inicjowane wartością jak var z undefined       |    z wartością undefined automatycznie na początku funkcji
+      Wywołanie zmiennej lek przez jej deklaracją    |  - zdefiniowanie zmiennej var poza funkcją automatycznie dodaje ją
+      spowoduje blad "a is not defined"              |    do obiektu window
+    - zdefiniowanie zmiennej let poza funkcją        |
+      nie dodaje jej do obiektu window               | 
+    */
+    let a = 10;
+    if (1 == 1) {
+        let a = 3;
+        console.log(a); // 3
+    }
+    console.log(a) // 3
+
+    /* 4. Czy zdarzenia widnow.onload oraz document.onload są wywoływane jednocześnie?
+
+      window.onload jest wywoływany kiedy DOM jest gotowy razem z załadowanymi obrazkami, css, skryptami itp - 
+      czyli kiedy wszystko jest załadowane.
+
+      document.onload jest wywoływany kiedy DOM jest gotowy i załadowany, ale np obrazki jeszcze nie zostały do końca pobrane.
+
+      Dla document istnieje zmienna document.readyState której wartość odzwiercedla postęp ładowania dokumentu, wartośc
+      - loading - gdy jest ładowany
+      - interactive - kiedy parsowanie się skończy ale dałej ładowane są dalsze zasoby
+      - complete - kiedy zostanie załadowany
+
+      Zdarzenie readystatechange jest wywoływane w dokumencie ze względu na powyższe zmiany
+    */
+
+    /* 5. Czym jest null oraz undefined
+
+    NULL - reprezentuje intencjonalny brak wartości w zmiennej, jest to jeden z prymitywów w JS. Wartość null ma 
+    typ object zwracany z typeof. Aby opróżnicż zmienną z wartości stosuje się przypisanie null jako wartości
+
+    UNDEFINED - jest przypisywane automaczynie do nowo utworzonej zmiennej, jeżeli nie została przypisana do niej jakaś
+    inna wartość. Typem undefined jest undefined.
+
+    NUll                                             | Undefined
+    - jest przypiswaną wartością deklarującą, że     | - nie jest przypisywan wartością, ale nowo powstałe zmienne
+      zmienna nie wskazuje na obiekt lub jakąś       |   bez przypisanej wartości będą miały undefined
+      wartość - oznacza pustkę, brak referencji      | - typ undefined to undefined
+    - typ null to object                             | - undefined jest prymitywem określającym że zmianna nie ma przypisanej wartości
+    - null jest prymitywem                           | - reprezentuje brak wartości
+    - konwertuje się do 0 przy prymitywnych          | - kowertuje się do NaN przy prymytiwnych operacjach
+      operacjach                                     |
+    */
+
+    /* 6. Jaka jest różnica między atrybutem a właściwością
+       Atrybut - dodatkowe informacje w tagu html
+       Właściwość - zmienna wewnątrz obiektu
+
+       Atrybuty w tagu html są przeniesione do drzewa DOM jako właściwości attributes będąca kolekcją wszystkich atrybutów
+       w danym elemencie html,w w praktyce jest to NamedNodeMap i jest uzupełniana podczas parsowania kodu html.
+       
+       Można również użyc funkcji na danym elemencie drzewa DOM getAttribute() do uzyskania wartości atrybutu oraz 
+       setAttribute do zmiany tej warotści
+
+    */ 
+
+    /* 7. Czym jest NaN, isNan, isFinite
+    NaN jest to globalna właściwość reprezentująca wartość "Not a Number". Wsakzuje, że wartość nie jest dopuszczalną liczbą, 
+    rzadko się z niej korzysta, ale czasem pojawia się podczas niedozwolonych funkcji matematycznych np. Math.sqrt(-1) -> NaN
+
+    Czym jest isNaN?
+    Funkcja, która sprawdza czy wartośc jest niedozwolona liczbą - jeżeli tak zwróci true
+    
+    Czym jest inFinite?
+    Funkcja, która sprawdza czy wartość to skończona liczba
+    */
+    console.log(isNaN(Math.sqrt(-1))) // true
+    console.log(isFinite(Infinity)) // false 
+    console.log(isFinite(-Infinity)) // false 
+    console.log(isFinite(NaN)) // false 
+    console.log(isFinite(55)) // true
+
+    /* 8. Czym jest operator typeof? 
+
+    Typeof zwraca typ danych przechowywanych w zmiennej
+
+    */
+
+    typeof 23 // number
+    typeof "tekst" // string
+    typeof "45" // string
+    typeof true // boolean
+    typeof undefined // undefined
+    typeof 1n //bigInt
+    typeof Symbol() // symbol
+    typeof function(){} // function
+    typeof {data: 10} // object
+    typeof [] // object
+    typeof null // object
+
+    /* 9. Jaka jest różnica między window a document
+
+    Globalny obiekt window w przeglądarce ma w sobie wszystkie globalne zmienne, globalne funkcje, obiekt location
+    XMLHttpRequest, console, localStorage itp
+
+    Obiekt document również jest zawarty w window jako jego właściwość i jest reprezentacją DOM. Document Object Model powstały
+    w wyniku parsowania kodu HTML. Tagi html przekształcane są na węzły - nodes, dlatego document dostarcza funkcje jak
+    document.getElementById, addEventListener(), getElementsByTagName() itp 
+
+    window może być pominięty przy odwołaniu się do document ponieważ JS znajdzie sobie ten obiekt na końcu w scope chain
+    */
+    console.log(document == window.document) // true
+
+    /* 10. Czym jest JSON?
+
+    JSON - JavaScript Object Notation jest tekstowym formatem danych na bazie składni JS. Jest stosowany w transmisji danych 
+    poprzez sieć. Mime type JSONa to application/json - rozszerzenie .json
+
+    1) Konwersja JSONa na Obiekt
+    2) Konwersja Obiektu na JSON
+    */
+    text = null;
+    let obj10 = {}
+    let obj10a = JSON.parse(text)
+    let strJson = JSON.stringify(obj10)
+
+    /* 11.  Jakie są możliwości pobrania elementów z drzewa dom
+
+    Obiekt document dostarcza wiele funkcji do pobierania elementów z drzewa DOM:
+
+    -getElementById - po ID
+    -getElementsByClassName - po klasach
+    -getElementsByTagName - po nazwie taga
+    -querySeletor - pierwszy element według selektora css
+    -querySeletorAll - wszystkie elementy według selektora css
+    -getElementsByName() - lista elementów po atrybucie name
+
+    */ 
+
+    /* 12. Jak dodać lub usunąć klasę css
+
+    Np dynamicznie za pomocą funkcji
+    */ 
+
+    function addClass(selector,className){
+     let el = document.querySelector(selector)
+     if(el){
+        el.classList.add(className)
+     }
+    }
+
+    function removeClass(selector,className){
+    let el = document.querySelector(selector)
+     if(el){
+        el.classList.remove(className)
+     }
+    }
+
+    /* 13. Jak uruchomić kod JavaScript gdy drzewo DOM jest już gotowe
+  
+    1) umieszczenie skryptu na końcu strony przed takiegim zamykającym body
+    2) umieszczenie kodu w handlerze do wywołania na event DOMContentLoaded
+    3) obserwowanie zmian właściwości readyStage aż osiągnie stan complete 
+      
+    */
+   
+    document.addEventListener('DOMContentLoaded',function(){
+        // drzewo dom gotowe - 2)
+    })
+
+    document.onreadystatechange = function(){
+        if(document.readyState == "complete"){
+            // DOM ready - 3)
+        }
+    }
+
+    /* 14. W jaki sposób odczytać wszystkie kliknięcia na stronie?
+  
+    Można wykorzystać event bubbling - wszystkie kliknięcia będą szły ku górze do elemetu body
+      
+    */
+
+    document.querySelector('body').addEventListener('click', function(){
+        console.log('kliknięcie')
+    })
+
+    /* 15. Jak stworzyć obiekt w JS?
+  
+    1) Konstruktor obiektu
+    2) Funckja create obiektu
+    3) Literał obiektu
+    4) Funkcja konstruująca
+    5) Funkcja konstruująca z prototypem
+    6) Klasa ES6
+    7) Singleton
+    */
+
+    let obj1 = new Object()
+
+    let obj2 = Object.create(null)
+
+    let obj3 = {}
+    function Item(name){
+        this.name = name
+    }
+
+    let obj4 = new Item("desk")
+    function Item2(name){
+        this.name = name
+    }
+
+    Item.prototype.brand = "X"
+    let obj5 = new Item2("desk")
+
+    class Car {
+        constructor(name){
+            this.name = name
+        }
+    }
+
+    let obj6 = new Car("Mustang")
+    
+
+ 
+
+    
+</script>
+
+</html>
