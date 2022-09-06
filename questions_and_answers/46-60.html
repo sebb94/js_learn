@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<style>
+    .class1{
+        background-color: red;
+    }
+</style>
+
+<body>
+    <p id="p1">p1</p>
+    <p id="p2">p2</p>
+</body>
+<script>
+
+    /* 46. Jaka jest różnica miedzy pętlami for in oraz for of
+
+    For in - interuje na kluczach enuramble obiektu
+    For of - iteruje na wartościach obiektu
+
+    */
+
+    let obj = {a: 1, b:2, c:3}
+
+    for(key in obj){
+        console.log(key) // a b c 
+    }
+
+    let arr = [1,2,3]
+    for( value of arr){
+        console.log(value) // 1 2 3
+    }
+
+    /* 47. Jaka jest różnica między funkcjami call, apply i bind
+
+    Call,apply - umożliwia wywołanie funkcji danego obiektu w kontekście innego obiektu, argumenty przekazywane są po przecinku
+    Bind - na stałe wiąże podaną funkcję z danych obiektem i zwraca ją do wielokrotnego wykorzystania
+
+    */
+
+    let car1 = {
+        brand: "ford",
+        name: "mustang",
+        info: function(year,color){
+           console.log(this.brand, this.name, year, color)
+        }
+    }
+
+    let car2 = {
+        brand: "dogde",
+        name: "charger"
+    }
+
+    car1.info(2000,"red")
+
+    car1.info.call(car2,2015,"blue") // dodge charger 2015 blue
+    car1.info.apply(car2,[2012,"black"]) // dodge charger 2012 black
+
+    let car2Info = car1.info.bind(car2,2018,"white") // dodge charger 2018 white
+    car2Info()
+
+
+    /* 48. Dlaczego stosuje sie JSON. do czego służy parse i stringify
+
+
+    Format JSON stosuje się w komunikacji między aplikacją internetową a serwerem, JSON to format tekstowy co ułatwia
+    wzajemną komunikację oraz obsługę zarówno od strony serwera jak i klienta
+
+    Do czego służy JSON.stringify()?
+    Podczas wysyłki danych na serwer dane muszą być w formacie tekstowym, funkcja JSON.stringify() zamienia obiekt na jego
+    reprezentację tekstową w formacie JSON, który może być wysłany na serwer
+
+    Do czego służy JSON.parse()?
+    Dane z serwera w formacie JSON aby były łatwe do oczytania w JS powinny być skowertowane na obiekt - to pozwala JSON.parse()
+    
+    */
+
+    /* 49. Czy można użyć zarezerwowanych słów jako identyfikatora? Jak uzyskac wymiary obrazka?
+
+    Czy można użyć zarezerwowanych słów jako identyfikatora? Nie można - nazwy zmiennych, funkcji, labelów nie mogą być słowami
+    kluczowymi
+   
+    */
+
+    // szerokośc i wysokosc obrazka
+    let img = new Image()
+    img.src = "https://cdn.pixabay.com/photo/2022/09/02/19/04/sunflower-7428212_960_720.jpg"
+    img.onload = function (){
+        console.log(this.width + "x" + this.height)
+    }
+
+    // szerokość oraz wysokość okna w JS 
+
+    // console.log(window.innerHeight)
+    // console.log(window.innerWidth)
+    // console.log(document.body.clientHeight)
+    // console.log(document.body.clientWidth)
+    // console.log(document.getElementById(p1).clientHeight)
+    // console.log(document.getElementById(p1).clientWidth)
+
+
+    /* 50. Czym jest operator trójelementowy. funkcja anonimowa. proto a prototype
+
+    Operator trójelementowy - prostszy zapis if else
+
+    Jaka jest różnica pomiędzy proto a prototype?
+
+    Obiekt __proto__ jest używany do przeszukania łanucha prototypów w celu znalezenia metod czy właściwości.
+    Natomiast prototype jest obiektem w celu zbudowania prototypów __proto__ gdy tworzymy nowy obiekt za pomocą new
+
+    Czym jest funkcja anonimowa?
+    Funkcja bez nazwy - przypisywane są do zmiennych albo używane jako callbacki np dla innych funkcji jak addEventListener itp
+
+    */ 
+
+    /* 51. Jakie są sposoby aby uruchomić kod JavaScript kiedy strona sie załaduje
+
+    - handler window.onload = function(){} który wywoła przypisaną funkcję po załadowniu całej strony z obrazkami,css etc
+    - handler document.onload = function(){} będzie wywołany kiedy drzewo DOM będzie gotowe ale nadal w tle mogą być pobierane 
+      obrazki, css itp
+    - body onload dziala jak window onload
+      <body onload="startJS();">
+
+    */ 
+
+    /* 52. Czym jest freeze. czemu jest używany, wykrycie obiektu freeze etc
+
+    Metoda freeze() może być używana na obiekcie aby uniemożliwić jego zmianę np dodawanie, usuwanie właściwości, zmianę 
+    konfiguracji, enumeracji czy możliwości zapisu obiektu. Zwraca przekazany obiekt, nie tworzy kopii obiektu.
+
+    Dlaczego używa się freeze()?
+    Pozwala na zamrożenie tablic oraz obiektów - sprawia, że obiekty są niezmienne - immutable
+
+    Dlaczego powinno się używać freeze()?
+    W programowaniu niektóre elementy API powinny być niezmienne, czyli bez możliwości modyfikacji. rozszerzenia poza ich
+    kontekstem aby zapewnić prawidłowe działanie - działa to jak final w innych językach
+
+    Jak wykryć, czy obiekt jest frozen?
+    Funkcja Object.isFrozen() zwróci true, jeżeli obiekt jest frozen
+
+    */ 
+    let obj2 = Object.freeze({a:10,b:20})
+    obj2.a = 30
+    console.log(obj2) // 10,20
+
+   console.log(Object.isFrozen(obj2))
+
+    /* 53. Jak wykryć czy js jest włączony na stronie? jak wykryć preferencje języka?
+
+    Jak wykryć czy js jest włączony na stronie?
+    tag <noscript>
+          <a href="no_js.html"> JS wyłączony - kliknij tutaj </a>
+        <noscript>
+
+    */
+
+    let language = navigator.languages || navigator.languages[0] || navigator.language || navigator.userLanguage
+    console.log(language)
+
+    /* 54. Czym jest parametr rest oraz operator spread?
+
+    Parametr rest - możemy użyć w funkcji do pobrania wszystkich przekazanych argumentów do funkcji - został dodany w ES2015 czyli ES6
+    Operator spread - pozwala na rodzielenie tablic, obiektów na pojedyczne wartości, elementy
+
+    */ 
+
+    function sum(...args){
+        let v = 0
+        for(let i=0; i< args.length; i++) {
+            v+=args[i]
+        }
+        return v 
+    }
+    
+    console.log(sum(1,2,3,4,5,6,7,8,9,10)) // 55 
+
+    function sum2(a,b,c){
+        let d = a+b+c
+        console.log(d)
+        console.log(typeof d)
+    }
+    let str = "124"
+    let num = [1,2,3]
+    sum2(...str) // 124
+    sum2(...num) // 6
+
+    /* 55. Co robi funkcja Object.is 
+
+    Sprawdza, czy dwie podane wartości są takie same
+
+    */ 
+ 
+    let obj3 = {a : 20, b:30 }
+    let obj4 = obj3
+    let obj5 = {a : 20, b:30 }
+    let arr1 = [1,2,3]
+    let arr2 = [1,2,3]
+    let arr3 = arr2 
+    console.log("object is")
+    console.log( Object.is( true,true) ) // true
+    console.log( Object.is( undefined, undefined ) ) // true
+    console.log( Object.is( true, false ) ) // false
+    console.log( Object.is( obj3, obj4 ) ) // true
+    console.log( Object.is( obj3, obj5 ) ) // false
+    console.log( Object.is( obj4, obj5 ) ) // false
+    console.log( Object.is( arr1, arr2 ) ) // false
+    console.log( Object.is( arr2, arr3 ) ) // true
+  
+</script>
+
+</html>
