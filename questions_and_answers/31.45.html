@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<style>
+    .class1{
+        background-color: red;
+    }
+</style>
+
+<body>
+    <p id="p1">p1</p>
+    <p id="p2">p2</p>
+</body>
+<script>
+    /* 31. Jak uzyskać adres url strony. parametr z adresu , czym jest document.location
+
+    Można użyć: window.location.href do uzyskaniu adresu URL strony. Można podmienić URL odnosząć się do tej wartości co 
+    przekierowuje użytkownika.
+
+    Jakie są składowe obiektu document.location?
+    Poniżej właściwości obiektu document.location dla https://policies.google.com/terms
+
+    - href - cały url https://policies.google.com/terms
+    - protocol - https:
+    - host - "policies.google.com"
+    - hostname - "policies.google.com"
+    - href - "policies.google.com/terms"
+    - hash - kotwica w linku
+    - origin "https://policies.google.com"
+    - pathname - "/terms"
+    - port - numer portu w URL
+
+    */
+
+    let url = new URL("https://example.com?param1=abcd")
+    let urlParams = new URLSearchParams(url.search) // urlsearch - param1=abcd
+    let param1 = urlParams.get("param1") 
+    console.log(urlParams)
+    console.log(param1)
+
+    /* 32. Jak sprawdzić czy string istnieje w innym stringu
+
+    - indexOf
+    - includes (ES6)
+    - regEx
+
+    */
+
+    var str = "Hello World", subStr = "World", regex = /World/
+    console.log(str.indexOf(subStr) !== -1)  // true
+    console.log(str.includes(subStr)) // true
+    console.log(regex.test(str)) // true
+
+
+    /* 33. Jak sprawdzić czy obiekt ma daną właściwość/klucz? Jak enumerowac właściwości obiektu
+    
+    Jak sprawdzić czy obiekt ma daną właściwość/klucz?
+    1) Użycie operatora in
+    2) Funkcja hasOwnProperty - zwróci true, jeżeli instancja obiektu ma podaną właściwość, ale nie brane są pod uwagę
+       odziedziczone właściwości
+    3) Porównanie do undefined
+ 
+    */
+    console.log("---33---")
+    let obj = {test: "abc", a:10, b:20}
+    if("test" in obj) console.log(true)
+    if(obj.hasOwnProperty("test")) console.log(true)
+    if(obj.test != undefined) console.log(true)
+    if(obj.test1 == undefined) console.log(false + " nie ma") 
+
+    for (let key in obj){
+        if (obj.hasOwnProperty(key)){
+            console.log(key + " : " + obj[key])
+        }
+    }
+    console.log(obj["a"])
+    console.log(obj["test"])
+
+    /* 34. Czym jest arguments. ilość argumentów. dodanie właściwosci do funkcji. polyfill
+
+    1) Obiekt arguments - obiekt dostępny w każdej funkcji z listą przekazanych argumentów do funkcji, szczególnie przydatny, gdy 
+    przekazano do funkcji więcej argumentów niż zostało zdefiniowanych w deklaracji funkcji
+
+    2) Ilosc argumentow - mozna uzyć .length
+
+    3) Dodanie własciwosci do funkcji - tak bo funkcja jest obiektem
+
+    4) Polyfill - kod który dodaje wsparcie nowych funkcjonalnosci dla starszych przegladarek
+
+    */
+
+    function multiply(){
+        let v = 1 
+        for(let i = 0, len = arguments.length; i< len; i++){
+            v *= arguments[i]
+        }
+        return v
+    }
+
+    console.log(multiply(1,2,3,4))
+
+    function test(a,b,c,d,e){
+
+    }
+    console.log(test)
+    console.log(test.length) // 5
+    test.a = "f"
+    console.log(test.a) 
+
+    if(!String.prototype.trim){
+        String.prototype.trim = function(){
+            return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "")
+        }
+    } else{
+        console.log("trim istnieje")
+    }
+
+    /* 35. Jak można wyświetlić aktualną datę, jak uzyskać timestamp i porównać daty?
+
+     Obiekt date służy do informacji o czasie
+ 
+     Do timestampu generacji:
+      .getTime()
+      +new Date()
+      Date.now()
+    */
+
+    let date = new Date()
+    console.log(date)
+    console.log(date.getDate())
+    console.log(date.getDay())
+    console.log(date.getMonth())
+    console.log(date.getYear())
+    console.log(date.getFullYear())
+    console.log(date.getHours())
+    console.log(date.getMinutes())
+    console.log(date.getSeconds())
+    console.log(date.getTime())
+
+    let dateInThePast = new Date('2024-01-01')
+    if(dateInThePast.getTime() > date.getTime()){
+        console.log("Data z przyszłosci - będzie")
+    } else{
+        console.log("Data z przeszłosci - juz bylo")
+    }
+
+    console.log( +new Date() )
+    console.log( Date.now() )
+
+
+    /* 36. Jak zrobić string w wielu liniach, trimwac string. sprawdzić początkowy string
+
+    Sprawdzenie czy string zaczyna się innym stringiem - starts with
+
+    String w wielu liniach - backtick, plusik lub terminal (slash) - niezalecany
+
+    Trimowanie stringa - funkcja trim
+
+    */
+
+    if( "Hello World".startsWith("Hello")) console.log("ok")
+
+    console.log(" \n     Hello World \n \t \r ".trim())
+
+    console.log(`one line 
+    second line`)
+
+    const multiline = "asd " + 
+                    "asdasd"
+    console.log(multiline)
+
+    /* 37. Jak dodać domyślną wartość do zmiennej? pary kluczy i wartości
+
+     Jak dodać domyślną wartość do zmiennej - za pomocą operatora logicznego OR
+     Jeżeli a jest falsy czyli null,undefined,0 lub pusty string - będzie przypisane 10
+
+     Jak dodać pary kluczy i wartości?
+     1) za pomocą obiektu
+     2) z nawiasami kwadratowymi
+     3) z dynamiczną nazwą
+ 
+
+    */
+
+    let a = ""
+    let data = a || 10
+    console.log(a)
+
+    let obj1 = {}
+    obj1.a = 10
+    obj1["b"] = 20 
+    const c = "c"
+    obj1[c] = 30
+
+    console.log(obj1)
+
+    /* 38. Jak używać instrukcję break oraz continue
+
+    break - pozwala na wyjście z pętli w dowolnym momencie
+    continue - przeskakuje jedną iterację do nastepnej o ile warunki pętli są spełnione czyli kod po continue nie jest
+    wywoływany
+
+    */
+    
+     for(let i = 0;i<10;i++){
+        console.log(i)
+        if(i == 2) break
+     }
+
+     console.log("---")
+
+     for(let i = 0;i<5;i++){
+        if( i % 2 == 0) continue
+        console.log(i)
+        
+     }
+     
+
+    /* 39. Jak wygenerować liczby losowe oraz z podanego zakresu
+
+    Za pomocą funkcji Math.random() zwracającą liczbę w przedziale od 0 (włącznie) do 1 (bez 1) np 0.4512. Zwykle używa się
+    jej w kombinacji z funkcją floor(), która zaokrągla w dół do najbliższej liczby całkowitej. 
+
+    */
+
+    // liczba 1 do 100
+    let random1to100 = Math.floor(Math.random() * ( 100) + 1)
+
+    console.log("random 1 to 100:" + random1to100)
+
+    function randomInt(min,max){
+        return Math.floor(Math.random() * (max - min + 1) ) + min
+    }
+    let d = randomInt(10,12)
+    console.log(d)
+
+    /* 40. Jak zmienić style elementu html oraz atrybut elementu html
+
+    - zmieniając bezpośrednio style elementu
+    - dodać klasę z stylami dla danego elemetu
+
+    Jak dodać atrybut elementu HTML?
+    - atrybuty można zmienić albo dodać za pomocą funkcji setAttribute(), odczytać dzięki getAttribute()
+
+    */
+
+    document.getElementById("p1").style.backgroundColor = "green"
+    document.getElementById("p2").classList.add('class1')
+    document.getElementById("p2").setAttribute('data-cy','p2-cypress')
+    console.log(document.getElementById("p2").getAttribute('data-cy')) 
+
+    /* 41. Jak wypelnić tablice wartościami. posortowaś ją. odwrócić kolejność elementów
+
+    Jak wypełnić tablicę początkowymi wartościami - funkcja fill()
+    Jak skonwertować tablicę na obiekt? Spread operator ... (od ES6)
+    Jak posortować tablicę? sort()
+    Jak odwrócic tablicę? reverse()
+
+    */
+
+    let arr = new Array(5).fill(0)
+    console.log(arr) // 0,0,0,0,0
+
+    let objFromArr = {...arr}
+    console.log(objFromArr)
+
+    let names = ["Paweł","Ania","Zenon","Barbara"]
+    console.log("Names before sort: " + names)
+    let sortedArr = names.sort() 
+    console.log("Names after sort: " + names)
+    console.log("Sorted names: " + sortedArr)
+    let reversedArr = sortedArr.reverse()
+    console.log("Names after reverse: " + names)
+    console.log("Sorted names after reverse: " + sortedArr)
+    console.log("Reversed names: " + reversedArr)
+
+    /* 42. Czym jest ajax. jak zrobić synchroniczne i asynchroniczne żądanie
+
+    AJAX - Asynchronous JS and XML i jest tro grupa technilogii (HTML,CSS,JS,XMLHttpRequest etc) używanych aby wyświetlić dane
+    asynchronicznie co pozwala na wysłanie danych na serwer oraz otrzymanie danych zwrotnych dzięki czemu strona będzie bardziej
+    dynamiczna.
+
+    Synchroniczne żadanie AJAX zablokuje przeglądarke, kartę na czas wykonywania zapytania na serwer oraz otrzymanie odpowiedzi 
+    z serwera. Trzeci argument funkcji open obiektu XMLHttpRequest musi miec wartosc false.
+ 
+    */
+
+    function loadData(){
+        let xhttp = new XMLHttpRequest()
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 || this.status == 200){
+                document.getElementById('p1').innerHTML = this.responseText
+            }
+        }
+        xttp.open("GET","https://example.com/data.xml", true)
+        xttp.send()
+    }
+
+    function loadData2(){
+        let xhttp = new XMLHttpRequest()
+        xttp.open("GET","https://example.com/data.xml", false)
+        xttp.send()
+    }
+
+    /* 43. Czym jest PWA. jaki wyniki da dodanie: jeden plus dwa plus string 3?
+
+    PWA - progressive web applications - specjalny typ aplikacji mobilnych dostępnych przez internet oraz zbudowanych w 
+    technologiach HTML,CSS, JS. Są dostępne na serwerze, dostępne przez internet oraz indeksowane przez wyszukiwarki
+
+    1+2+"3"
+    Wynik będzie string "33" - liczba 3 z operatorem plus w kontekście stringa stworzy nowy string
+
+    */
+    let test2 = 1+2+"3"
+    console.log(test2)
+    console.log(typeof test2)
+
+    /* 44. Jak zaregować na kliknięcie back przeglądarki? Jak wyłączyć menu kontekstowe?
+
+    Jak zaregować na kliknięcie back przeglądarki? - podpiąc się pod zdarzenie onbeforeunload, drukowanie onafterprint
+    Wyłączenie prawego przycisku myszy - zdarzeni oncontextmenu
+
+    */
+
+    window.onafterprint = function(){
+        alert("Czy zapisać dane?")
+    }
+
+    window.oncontextmenu = function(){
+        return false
+    }
+
+    /* 45. Czym są wrapper objects? Jak wykryć wywołanie konstruktra?
+
+    wrapper objects - typy proste (boolean, string, number) nie mają swoich funkcji czy właściwości w JS, ale ich obiekty
+    opakowujące juz tak - dlatego kiedy jest to potrzebne są automatycznie konwertowane na reprezentację w postaci obiektu co
+    pozwala na np wywołanie danej funckji. Obiekt String dostarcza wiele funkcji jak np trim(), toUpperCase() itd z których można
+    korzystac typami prostymi stringiem (prymityw)
+
+    Jak wykryć wywołanie konstruktra (z operatorem new)?
+    Trzeba użyć new.target aby wykryć czy funkcja była wywołana z operatorem new czyli jak konstruktor, bez new new.taget
+    zwróci wartośc undefined
+ 
+    */
+   
+   console.log("witaj".toUpperCase()) // WITAJ
+
+   function Car(name,brand){
+        this.name = name 
+        this.brand = brand 
+
+        if(new.target !== undefined){
+            console.log("Użycie new")
+        }else{
+            console.log("Bez użycia new")
+            return new Car(name,brand)
+        }
+   }
+
+   let car1 = new Car("Auris","Toyota")
+   let car2 = Car("3","BMW")
+   console.log(car1)
+   console.log(car2)
+</script>
+
+</html>
