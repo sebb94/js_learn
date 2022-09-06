@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+
+    /* 16.  Do czego służy funkcja slice splice, jakie są między nimi różnice
+
+     Slice - pozwala na zwrócenie nowej tablicy z wybranymi elementami od startowego indeksu aż do opcjonalnego
+     indeksu jako drugi argument bez uwzględnienia tego ostatniego elemetu. Jeżeli drugi argument zostanie pominięty
+     wybranę są elementy do końca tablicy
+
+     Splice - pozwala na usuwanie oraz dodawanie elementów to tablicy, zwaracane są usunięte elementy. Pierwszy argument
+     wsakzuje pozycję do dodania albo usunięcia elementów. Drugi opcjonalny argument określa ilość elementów do usunięcia.
+     Każdy kolejny opcjonalny argument jest dodawany do tablicy
+
+     Slice                                                     | Splice
+      - nie modyfikuje oryginalnej funkcji (immutable)         | - modyfikuje oryginalną tablicę (immutable)
+      - zwaraca podzbiór oryginalnej tablicy                   | - zwraca skasowane elementy w tablicy
+      - funkcja używana do pobierania elementów z tablict      | - używana do dodawania oraz kasowania elementów z tablicy
+
+    */
+
+    let arr = ["a","b","c","d"]
+    let arr1 = arr.slice(1) // "b","c","d"
+    let arr2 = arr.slice(0,2) // "a", "b"
+    let arr3 = arr.slice(2) // "c", "d"
+    console.log(arr1,arr2,arr3)
+
+    let array = [1,2,3,4,5,6,7,8]
+    let array1 = array.splice(0,0,"a","b","c") // "a","b","c",1,2,3,4,5,6,7,8
+    let array2 = array.splice(0,2,"X") // ["a","b"]
+    console.log(array,array2)
+    //arr - "X","c",1,2,3,4,5,6,7
+
+   /* 17. Czym jest funkcja pierwszej klasy wyższego rzędu, pure currying, unary
+
+   1) Funkcja pierwszej klasy - funkcje w JS są funkcjami pierwszej klasy, gdyż same w sobie są obiektami i mogą być
+      argumentami innej funkcji, mogą być zwracane z funkcji, rownież elementem tablicy czy przypisywane do zmiennych
+
+   2) Funkcje pierwszego rzędu - first order function - nie akceptuje funkcji jako argumentu i nie zwraca funkcji
+
+   3) Funkcje wyższego rzędu - higher order function - akceptuje funkcje jako argument albo zwraca funkcje
+
+   4) Funkcja unary - funkcja jednoargumentowa (monadic)
+
+   5) Currying - proces tłumaczenia funkcji o wielu argumentach na funkcję o jednym argumencie. Jeśli kolejne argumenty 
+      są potrzebne to funkcja o jednym argumencie zwraca kolejną funkcję. Zwiększa to możliwosć ponownego wykorzystania funkcji.
+  
+    6) Pure function - czysta funkcja - zawsze gdziekolwiek wywołana w kodzie z tymi samymi argumentami zwróci ten sam wynik,
+       bez skutków ubocznych. Wywołanie takiej funkcji n razy da n takich samych wyników. Takie funkcje są o wiele prostsze w 
+       utrzymaniu/ testowaniu, gdyż nie generują skutków ubocznych
+
+    */
+
+    // 1
+    const clickHandler = function(){
+        console.log("click")
+    }
+    document.addEventListener("click",clickHandler)
+
+    // 2
+    const firstOrderFunction = () => console.log("test")
+
+    //3
+    const highOrderFunction = func => func()
+    highOrderFunction(firstOrderFunction)
+
+    //4 
+    const unaryFunc = a => console.log(a)
+
+    //5 
+    function multiply(a){
+        return function(b){
+            return function(c){
+                return a * b * c
+            }
+        }
+    }
+
+    let mc1 = multiply(1)
+    let mc2 = mc1(2)
+    let v = mc2(3) // 6
+
+    let v2 = multiply(1)(2)(3) // 6
+
+    /* 18.  Czym jest temporal dead zone?
+
+       To przestrzeń przed deklaracją zmiennej let oraz stałej const, gdzie odwołanie się do tych zmiennych spowoduje
+       błąd, ponieważ nie są jeszcze zadeklarowane. Dzięki temu kod jest bardziej logiczny, wymusza to stworzenie wszystkich
+       zmiennych oraz funkcji zanim zostaną użyte. W przypadku var, let i const hoisting istnieje, gdzie deklaracja zmiennych 
+       są przenoszone na początek funkcji. W przypadku var autoamtycznie zmienna jest inicjalizowana wartością undefined i można 
+       się do niej odwołać przed deklaracją zmiennej var - jej temporal dead zone nie dotyczy - natomiast let i const mimo, że 
+       też mają hoisting - to ich wartości nie są inicjowane przez co odwołanie się do nich powoduje bląd
+
+    */
+
+    function test(){
+        //console.log(localLet) // erro cannot access localLet before inicialization
+
+        // temporal dead zone
+        
+        let localLet = 10;
+    }
+
+    /* 19.  Czym są funkcje natychmiastowe?
+
+    funkcje natychmiastowe - IFEE - Immediatly Invoked Function Expression to funkje wywoływane natychmiast po zdefiniowaniu.
+    Pozwalają na zdefiniowanie prywatnych zmiennych nie dostępnych poza ciałem takich funkcji.
+
+    */
+
+    (function(){
+     let privInfo = "asd"
+     // logika funkcji
+    })()
+
+    // console.log(privInfo) // privInfo is not defined 
+
+    /* 20. Czym jest hoisting
+
+    Hoisting to sytuacja, gdzie deklaracje zmiennych są przeniesione na początek ich scope przed wykonaniem kodu np. w funkcji.
+    JS hoistuje deklaracje, a nie izicjalizacje funkcji przez co odwołanie do zmiennej zadeklarowanej z słowem kluczowym var 
+    przed inicjalizacją zwróci wartośc undefined. Hoisting dotyczy również let i const ale nie są one inicjalizowane, przez co
+    odwołanie się do nich przed deklaracją spowoduje błąd.
+
+    */ 
+
+    function test(){
+        console.log(someVar) //undefined
+        var someVar = "asd"
+        console.log(someVar) // asd
+    }
+
+    /* 21. Czym są klasy es6
+
+    Wersja ES6 wprowadziła klasy ale trzeba miec na uwadze, że nadal bazują one na prototypach stąd jest to tzw
+    synatic sugar
+
+    */ 
+
+    function Car1(brand,name){
+        this.name = name 
+        this.brand = brand 
+    }
+    Car1.prototype.info = function(){
+        console.log(this.name,"by", this.brand)
+    }
+
+    class Car {
+        constructor(brand,name){
+            this.name = name 
+            this.brand = brand 
+        }
+        info(){
+            console.log(this.name,"by", this.brand)
+        }
+    }
+
+    let car1 = new Car1("Ford", "Mustang")
+    let car = new Car("Toyota","Auris")
+    car.info()
+    car1.info()
+
+    /* 22. Czym są closures - domknięcia
+
+    Clouser to kombinacji funkcji oraz leksykalnego środowiska w której ta funkcja była zadeklarowana wraz z jej
+    dostępem do zewnętrznych zmiennych poza tą funkcją. W takim wypadki funkcja ma trzy łancuchy zakresów - własny pomiędzy
+    nawiasami klamrowymi, zewnętrznej funkcji wraz z jej zmiennymi oraz globalny. Funkcja bar ma dostęp zarówno do swojego 
+    scope jak i do scope zewnętrznej funkcji foo przez co może korzystać z argumentu num nawet po wywołaniu foo - to jest 
+    closure
+
+    */ 
+
+    function foo(num){
+        function bar(text){
+            console.log(num,text)
+        }
+        return bar
+    }
+    let test1 = foo(10)
+    test1("test!") // 10 test!
+
+     /* 23. Czym jest scope?
+        
+     Scope czyli zakres określa dostęp do zmiennych, funkcji i obiektów w pewnej konkretnej części kodu w trakcie jego
+     wywoływania. Scope determinuje widocznośc zmiennych oraz innych zasobów w określonych częściach kodu. Zakres poszczególnych
+     zmiennych zależy też od tego jak był zadeklarowane:
+      -let i const - deklaruję zmienne o zakresie bloku - block scope
+      -var - zakres jest ograniczony do funkcji w której zostały zadeklarowane lub do przestrzeni globalnej, jeśli
+      deklarację mają poza funkcją
+
+     */ 
+
+     /* 24. Czym jest callback, callback hell etc?
+
+     1) Callback to funkcja przekazywana do innej funkcji jako argument, jest wywoływana w danej funkcji aby zakonczyć
+     daną akcję
+
+     2) Callback zagnieżdzony w innym callbacku aby wywołać jakąś akcję sekwencyjnie jedna po drugiej. To jest callback w callback
+
+     3) Callback hell - antywzorzec kiedy wystepuje wiele zagnieżdzonych callbacków co utrudnia debugowanie oraz zrozumienie
+        kodu z asynschroniczną logika
+
+        async1(function(){
+            async2(function){
+                async3(function){
+                    //kod
+                }
+            }
+        }
+
+     */ 
+     let successFunc = () => console.log("plik pobrany")
+     let errorFunc = () => console.log("blad pobierania pliku")
+
+     function downloadFile(successFunc,errorFunc){
+        setTimeout(() => {
+            if(Math.random() > 0.5){
+            successFunc()
+        } else{
+            errorFunc()
+        }
+        }, 500);
+     }
+     
+     downloadFile(successFunc,errorFunc)
+
+     console.log("---2")
+
+     function loadData(name){
+        console.log("asd")
+
+     }
+
+     loadData("items",function(){
+        console.log("Artykuły załadowane")
+        loadData("categories",function(){
+            console.log("Kategorie załadowane")
+            loadData("promotions",function(){
+               console.log("promocje załadowane")
+            })
+        })
+     })
+
+      /* 25. Czym jest strict mode?
+      
+      Strict mode jest specjalnym trybem dostępnym od ES5 dla całego programu czy też funkcji. Strict mode nie pozwala na
+      pewnie rozwiązania, czesciej są zgłaszane błędy oraz wyjątki. Wyraznie "use strict" instruuje przeglądarkę, że ma zostać użyty
+      strict mode
+
+      Dlaczego używa się strict mode?
+      Przydatny jest do pisania bezpieczniejszego, odpornego na błędy oraz wyjątki kodu. Przykładowo eliminuje przypadkowe tworzenie
+      globalnych zmiennych przez zgłoszenie błędu albo próbę przypisania wartości do nieistniejącej właściwości, zmiennej itd
+
+      Jak używa się strict mode?
+      Dodaje się "use strict" na początku pliku albo funkcji
+
+      */ 
+
+      /* 26. W jaki sposob można wykorzytac historie w JS?
+
+      Obiekt history dostępny w window pozwala na skierowanie użytkownika do poprzedniej lub kolejnej strony, które odwiedział
+
+      */ 
+
+      function goBack(){
+        window.history.back()
+      }
+
+      function goForward(){
+        window.history.next()
+      }
+
+      /* 27. Typy danych w js. zmienne niezadeklarowane a niezdefiniowane. globalne.
+
+      Typy:
+       - Number
+       - String
+       - Boolean
+       - Object
+       - Undefined
+       - Null
+       - BigInt
+       - Symbol
+      
+       Zmienna niezadeklarowana:
+        - zmienne nie istnieją w programie, gdyż nie są zadeklarowane
+        - przy próbie odczytania wartości bedzie błąd - "zmienna" is not defined
+
+       Zmienna niezdefiniowana:
+        - takie zmienne są zadeklarowane, ale nie mają przypisanej wartości
+        - przy próbie odczytania wartości zmiennej niezdefiniowanej zwracany jest undefined
+
+        Czym są zmienne globalne?
+         Zmienne dostępne w całym programie, czyli mają globalny scope. Sczególnie trzeba uwazac przy deklaracji zmiennych
+         w funkcjach, gdyż pozbawione let,car czy cost stworzą automatycznie zmienną globalną. W przypadku strict mode będzie 
+         zwrócony błąd i globalnie zmienna nie powstanie. Problemem jest to, że im więcej globalnych zmiennych tym większe
+         prawdopodobieństwo konfilktu nazw, trudniej debugowac kod i wynajdowac błedy.
+
+      */ 
+
+      let asd;
+      console.log('asd') // zadeklarowana ale nie zdefiniowana
+
+      function test2(){
+        'use strict'
+        newGlobal = 10
+      }
+
+     // test2() // assigment to undeclared variable newGlobal
+
+     /* 28. Czym jest operator delete. funkcja eval. void 0. podwójna negacja
+
+     1) Delete
+
+     2) Podwójna negacja
+
+     3) Funkcja eval
+
+     4) Void(0) - zapobiega odświezeniu strony aby zapobiec pewnym efektom ubocznym zdarzeń, czesto używane w dokumentach html
+        przy linkach aby nie dopuścić do odświeżenia strony przy ich kliknięciu
+        <a href="Javascript:void(0)" onclick="alert('Info!')"> Click </a>
+
+
+     */
+     
+     let obj1 = {a:1, b:2}
+     delete obj1.a 
+     console.log(obj1) // {b:2}
+
+     let arr4 = [1,2,3]
+     delete arr4[0]
+     console.log(arr4) // [empty,2,3]
+
+     console.log(!"string") // false
+     console.log(!!"string") // true
+     console.log(!!"") //false
+
+     eval("console.log('wynik jeden plus dwa to jest ' + (1+2))")
+
+
+    /* 29. Kto stworzyl Javascript, porównanie JS do Javy, EcmaScript
+
+     Js stowrzył Brendan Eich w 1995 w Netscape - początkowo nazwa to była Mocha ale ze względów marketingowych zmieniono
+     nazwę na JavaScript - Js nie ma prawie nic wspólnego z Javą oprócz nazwy. Oba są jezykami obiektowymi i jak wiekszosc 
+     języków ma taką samą bazową składnie jak ify, pętle itp
+
+     JS to język case-sensitive - zmienna test i Test to 2 rozne zmienne
+
+     Czy Js jest kompliowanym czy interpretowanym językiem?
+     Js jest językiem interpretowanym - interpreter czya kod źródlowy JS, który jest zapisany w pliku tekstoswym i jest 
+     interpretowany linijka po linijce. Nowoczesne przeglądarki są w stanie skomplikować kod JS po jedy wstępnym wczytaniu
+     tzw. Just in Time compilation, co skutkuje skompliowanym bytecodem, któy wykonuje się znacznie szybciej niż w tradycyjnym
+     interpretrze. Natomiast dalej kod źródłowy jest w postaci pliku tekstowego, dev nie musi go kompliować
+
+     EcmaScript to standard będący bazą języka JS - ustandaryzowany przez organizację ECMA.
+
+
+     */
+
+     /* 30. Do czego służą funkcje setTimeout, setInterval, clearTimeout, clearInterval
+
+     setTimeout - pozwala na wywołanie podanej funkcji po zdefiniowanym czasie, wywoływana jest tylko raz i zwraca id
+     które można użyć do skasowania timera, dzięki czemu nie będzie zaplanowanego wywołania
+
+     clearTimeout - używana aby nie dopuścić do wywołania funkcji przekazanej do setTimeout, do prwadiłowego działania potrzebuje
+     otrzymanego id timera, aby skasować tenże timer
+
+     setInterval - działa jak setTimeout z tą różnica, że wywołuje kod wielokrotnie aż przerwie się ten cykl funkcją clearTimeout()
+
+     clearInterval - przerywa działanie funkcji setInterval()
+
+
+     */ 
+
+     let wykonaSieRaz = setTimeout(function(){
+       console.log("wykona sie raz po 1s")
+     },1000)
+
+     let nieWykonaSieAniRazu = setTimeout(function(){
+       console.log("nie wykona sie ani razu")
+     },1000)
+
+     clearTimeout(nieWykonaSieAniRazu)
+
+     let wykonaSieDwaRazy = setInterval(() => {
+         console.log('co 1s')
+     }, 1000);
+
+     let wykonaSieDwaRazyClear = setTimeout(() => {
+        clearInterval(wykonaSieDwaRazy)
+     }, 2500);
+
+</script>
+
+</html>
