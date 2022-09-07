@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<style>
+    .class1 {
+        background-color: red;
+    }
+</style>
+
+<body>
+    <p id="p1">p1</p>
+    <p id="p2">p2</p>
+</body>
+<script>
+
+    /* 61. Jak połączyć tablice. czym jest funkcja some w tablicy
+
+    - połączenie tablic - concat()
+    - funkcja some służy do przeprowadzenia testu czy jakiś element tablicy spełnia warunek w przekazanej funkcji
+
+    */
+
+    let arr1 = [1,2]
+    let arr2 = ["A","B"]
+    let arr3 = [ {}, true ]
+    let arr = arr1.concat(arr2,arr3)
+    console.log(arr) // 1,2 "A", "B", {}, true
+
+    let a = arr.some(el => el === 1) // true
+    let b = arr.some(el => el[1] === 1) // false
+    let c = arr.some(el => el === 10) // false
+    console.log(a,b,c)
+
+    /* 62. Negacja tablicy. przycięcie liczby zmiennoprzecinkowej
+
+    - przycięcie liczby zmiennoprzecinkowej - toFixed(x)
+    - co da negacja tablicy? tablica nawet pusta jest true value - da wiec to false
+
+    */
+
+    let d = 2.43344343
+    console.log(d.toFixed(2)) // 2.43
+
+    let e = []
+    console.log(!e) // false
+
+    /* 63. Jak stworzyć określoną ilość kopii w stringu itd, trim stringa.
+
+    Jak stworzyć określoną ilość kopii w stringu? funkcja repeat() stworzy nowy string z ilością podanych powtórzeń (od ES6)
+
+    Trim stringa - trim start/left oraz trim end/right - działają podobnie - synonimy
+    
+    */
+
+    let f = "asd ".repeat(3)
+    console.log(f) // asd asd asd 
+
+    let g = "   test   "
+
+    console.log(g.trimStart()) // test   
+    console.log(g.trimLeft()) // test
+    console.log(g.trimEnd()) //     test
+    console.log(g.trimRight()) //   test
+
+    /* 64. Czym jest engine w przeglądarce v8
+
+    Engive V8 - projekt open source szybkiego enginu JS napisanego w C++, który używany jest w Chrome. Używany jest również w NodeJS
+    Implementuje standard ECMAScript i wspiera systemu windows, mac oraz linux.
+
+    Dlaczego JS jest dynamicznym językiem? 
+    Js jest luźno typowanym językiem - inaczej dynamiczny, ponieważ zmienne nie mają z góry określonego typu, który mają przechować.
+    Każda zmienna oprócz const może w dowolnej chwili mieć przypisaną dowolną wartość z dowolnym typem
+
+    Jak stworzyć nieskończoną pętle?
+    Mogą one zawiesić przeglądarke - trzeba uważać
+
+    let h = 0 
+    while(true){
+    console.log(h)
+     h++
+    }
+    
+    */
+  
+    /* 65. Funkcja strzałkowa
+    */
+
+    console.log("---functions---")
+
+    function basicAdd(a,b){
+        return a + b
+    }
+
+    console.log(basicAdd(2,3))
+
+    const basicAdd2 = function(a,b){
+        return a + b 
+    }
+
+    console.log(basicAdd2(2,3))
+
+    const newAdd = (a,b) => a + b 
+
+    console.log(newAdd(2,3))
+
+    const addAndPrint = (a,b) => {
+        let ret = a + b 
+        console.log("print")
+        return ret
+    }
+
+    console.log(addAndPrint(2,3))
+
+    const printData = a => console.log(a)
+    printData("asd")
+
+    const getObj = () => { return {a:5} }
+    console.log(getObj())
+
+    const getObj2 = () => ( {a:7} )
+    console.log(getObj2())
+
+    let arr4 = [1,2,3,4]
+
+    arr4.forEach( a => console.log(a));
+
+    //brak arguments
+
+    const argTest = (a, b) => console.log(arguments)
+
+    // argTest() // blad
+
+    // nie mozna skorzystac z konstruktora
+
+    let Bar = () => {
+
+    }
+
+    // let bar = new Bar() - blad not a constuctor
+
+    window.data = 99 
+
+    function oldObj(){
+        this.data = 5
+        this.print = function(){
+            setTimeout(function(){
+               console.log("oldObj this.data " + this.data)
+            }, 100);
+        }
+    }
+
+    const oldObjInstance = new oldObj()
+    oldObjInstance.print() // 99 bo utracilismy kontekst - można było w print dać var that = this i byłoby 5
+
+    function newObj(){
+        this.data = 5
+        this.print = function(){
+            setTimeout(() =>{
+               console.log("newObj this.data " + this.data)
+            }, 100);
+        }
+    }
+
+    const newObjInstance = new newObj()
+    newObjInstance.print() // 5 - nie stracilismy kontekstu
+
+
+</script>
+
+</html>
