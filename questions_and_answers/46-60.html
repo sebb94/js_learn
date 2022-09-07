@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <style>
-    .class1{
+    .class1 {
         background-color: red;
     }
 </style>
@@ -18,7 +18,6 @@
     <p id="p2">p2</p>
 </body>
 <script>
-
     /* 46. Jaka jest różnica miedzy pętlami for in oraz for of
 
     For in - interuje na kluczach enuramble obiektu
@@ -26,14 +25,18 @@
 
     */
 
-    let obj = {a: 1, b:2, c:3}
+    let obj = {
+        a: 1,
+        b: 2,
+        c: 3
+    }
 
-    for(key in obj){
+    for (key in obj) {
         console.log(key) // a b c 
     }
 
-    let arr = [1,2,3]
-    for( value of arr){
+    let arr = [1, 2, 3]
+    for (value of arr) {
         console.log(value) // 1 2 3
     }
 
@@ -47,8 +50,8 @@
     let car1 = {
         brand: "ford",
         name: "mustang",
-        info: function(year,color){
-           console.log(this.brand, this.name, year, color)
+        info: function (year, color) {
+            console.log(this.brand, this.name, year, color)
         }
     }
 
@@ -57,12 +60,12 @@
         name: "charger"
     }
 
-    car1.info(2000,"red")
+    car1.info(2000, "red")
 
-    car1.info.call(car2,2015,"blue") // dodge charger 2015 blue
-    car1.info.apply(car2,[2012,"black"]) // dodge charger 2012 black
+    car1.info.call(car2, 2015, "blue") // dodge charger 2015 blue
+    car1.info.apply(car2, [2012, "black"]) // dodge charger 2012 black
 
-    let car2Info = car1.info.bind(car2,2018,"white") // dodge charger 2018 white
+    let car2Info = car1.info.bind(car2, 2018, "white") // dodge charger 2018 white
     car2Info()
 
 
@@ -91,7 +94,7 @@
     // szerokośc i wysokosc obrazka
     let img = new Image()
     img.src = "https://cdn.pixabay.com/photo/2022/09/02/19/04/sunflower-7428212_960_720.jpg"
-    img.onload = function (){
+    img.onload = function () {
         console.log(this.width + "x" + this.height)
     }
 
@@ -117,7 +120,7 @@
     Czym jest funkcja anonimowa?
     Funkcja bez nazwy - przypisywane są do zmiennych albo używane jako callbacki np dla innych funkcji jak addEventListener itp
 
-    */ 
+    */
 
     /* 51. Jakie są sposoby aby uruchomić kod JavaScript kiedy strona sie załaduje
 
@@ -127,7 +130,7 @@
     - body onload dziala jak window onload
       <body onload="startJS();">
 
-    */ 
+    */
 
     /* 52. Czym jest freeze. czemu jest używany, wykrycie obiektu freeze etc
 
@@ -144,12 +147,15 @@
     Jak wykryć, czy obiekt jest frozen?
     Funkcja Object.isFrozen() zwróci true, jeżeli obiekt jest frozen
 
-    */ 
-    let obj2 = Object.freeze({a:10,b:20})
+    */
+    let obj2 = Object.freeze({
+        a: 10,
+        b: 20
+    })
     obj2.a = 30
     console.log(obj2) // 10,20
 
-   console.log(Object.isFrozen(obj2))
+    console.log(Object.isFrozen(obj2))
 
     /* 53. Jak wykryć czy js jest włączony na stronie? jak wykryć preferencje języka?
 
@@ -168,25 +174,25 @@
     Parametr rest - możemy użyć w funkcji do pobrania wszystkich przekazanych argumentów do funkcji - został dodany w ES2015 czyli ES6
     Operator spread - pozwala na rodzielenie tablic, obiektów na pojedyczne wartości, elementy
 
-    */ 
+    */
 
-    function sum(...args){
+    function sum(...args) {
         let v = 0
-        for(let i=0; i< args.length; i++) {
-            v+=args[i]
+        for (let i = 0; i < args.length; i++) {
+            v += args[i]
         }
-        return v 
+        return v
     }
-    
-    console.log(sum(1,2,3,4,5,6,7,8,9,10)) // 55 
 
-    function sum2(a,b,c){
-        let d = a+b+c
+    console.log(sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) // 55 
+
+    function sum2(a, b, c) {
+        let d = a + b + c
         console.log(d)
         console.log(typeof d)
     }
     let str = "124"
-    let num = [1,2,3]
+    let num = [1, 2, 3]
     sum2(...str) // 124
     sum2(...num) // 6
 
@@ -194,24 +200,123 @@
 
     Sprawdza, czy dwie podane wartości są takie same
 
-    */ 
- 
-    let obj3 = {a : 20, b:30 }
+    */
+
+    let obj3 = {
+        a: 20,
+        b: 30
+    }
     let obj4 = obj3
-    let obj5 = {a : 20, b:30 }
-    let arr1 = [1,2,3]
-    let arr2 = [1,2,3]
-    let arr3 = arr2 
+    let obj5 = {
+        a: 20,
+        b: 30
+    }
+    let arr1 = [1, 2, 3]
+    let arr2 = [1, 2, 3]
+    let arr3 = arr2
     console.log("object is")
-    console.log( Object.is( true,true) ) // true
-    console.log( Object.is( undefined, undefined ) ) // true
-    console.log( Object.is( true, false ) ) // false
-    console.log( Object.is( obj3, obj4 ) ) // true
-    console.log( Object.is( obj3, obj5 ) ) // false
-    console.log( Object.is( obj4, obj5 ) ) // false
-    console.log( Object.is( arr1, arr2 ) ) // false
-    console.log( Object.is( arr2, arr3 ) ) // true
-  
+    console.log(Object.is(true, true)) // true
+    console.log(Object.is(undefined, undefined)) // true
+    console.log(Object.is(true, false)) // false
+    console.log(Object.is(obj3, obj4)) // true
+    console.log(Object.is(obj3, obj5)) // false
+    console.log(Object.is(obj4, obj5)) // false
+    console.log(Object.is(arr1, arr2)) // false
+    console.log(Object.is(arr2, arr3)) // true
+
+    /* 56. Jak uzyskać pary kluczy i wartości enumerable obiektu. Object.values a entries
+
+    - Object.entries - można uzyskać właściwości obiektu, które są enumerable dzięki tej funkcji - zwróci pary key oraz value
+    - Object.values - zwróci tylko wartości
+    
+    */
+
+    const obj6 = {
+        a: "text",
+        b: "asd",
+        c: 10,
+        d: true 
+    }
+
+    for(let [key,value] of Object.entries(obj6)){
+        console.log(`${key} : ${value}`) // a: "text" b: "asd" c: 10 d:true
+    }
+
+    for(let value of Object.values(obj6)){
+        console.log(`${value}`) // "text"  "asd" 10 true
+    }
+
+    /* 57. Jak uzyskać listę kluczy obiektu oraz bezpośrednich właściwości obiektu
+
+    -Object.key - zwróci klucze z obiektu
+    - bezpośrednie właściwosci obiektu - pomijajac prototypy itp - zwróci tablice
+    
+    */
+
+    for(let key of Object.keys(obj6)){
+        console.log(`${key}`) // a b c d
+    }
+
+    console.log(Object.getOwnPropertyNames(obj6))
+
+    /* 58. Jak zakodować i zdekodować adres URL
+
+    Funkcja encodeURI() jest używana aby zakodować znaki specjalne aby nie powodowały problemów w adresie URL, nie są
+    kodowane małe i duże litery łacińskie, separatory jak / ?, znaki które mogą się znajdować prawidłowo w kotwicy url jak
+    hash oraz @ & = + $
+
+    */
+
+    let uri = 'https://strona.com?search=Ogonki śćłńę i inne'
+    let encoded = encodeURI(uri) // https://strona.com?search=Ogonki%20%C5%9B%C4%87%C5%82%C5%84%C4%99%20i%20inne
+    console.log(encoded)
+    
+    try {
+        let decoded = decodeURI(encoded)
+        console.log(decoded) // https://strona.com?search=Ogonki śćłńę i inne
+    } catch(e) {
+        console.log(e)
+    }
+
+    /* 59. Czym jest obfuscation - minimalizacja 
+
+    Obfuscation - proces polegający na zamianie nazwy zmiennych, funkcji, obiektów na prostsze nazwy wraz z innym operacjami
+    utrudniającymi kod - sprawiają, że zanjmuje on mniej miejsca przez co strona szybciej się wczytuje, ukryta jest logika 
+    biznesowa - utrudnione jej odczytanie i zrozumienie - reverse engineering również utrudniony.
+
+    Czym jest minimalizacja kodu - minification?
+
+    Minimalizacja to proces polegający na usunięciu wszystkich niepotrzebnych znaków jak nadmiarowe spacje, białe znaki, komentarze,
+    długie nazwy zmiennych itd - wszystko co nie zmienia funkcjonalności kodu, ale zmniejszy jego rozmiar - jest to również typ
+    obsfunction
+
+    Zalety minimaliacji kodu - zmniejsza wielkość pliku na serwerze co sprawia, że strony ładują się szybciej oraz jest mniejsze
+    zapotrzebowanie na transfer
+
+    */
+
+    /* 60. Zewnętrzny a wewnetzny kod js. string na kod ASCII. parametr a argument
+
+    1)Zewnętrzny a wewnetzny kod js
+    wewnętrzny - między tagami <script>
+    zewnętrzny - z osobnego pliku
+
+    2) String na kod ASCII
+
+    3) Parametr a Argument - stosuje sie zamiennie - parametr to nazwa zmiennej przekazanej do funkcji w jej definicji - argument
+    to zmienna przekazywana do funkcji podczas jej wywołania
+
+    */
+
+    console.log("test".charAt(0)) // 116 
+
+    function test5(parametr1,parametr2){
+        console.log(parametr1, parametr2)
+    }
+
+    test5("argument1", "argument2")
+
+
 </script>
 
 </html>
