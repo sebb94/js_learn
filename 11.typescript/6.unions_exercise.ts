@@ -72,7 +72,7 @@ type HSL = {
 
 // Create an array called colors that can hold a mixture of RGB and HSL color types
 
-let colors : (RGB | HSL)[] = []
+let colors2 : (RGB | HSL)[] = []
 
 // **********************************************
 // ******************* PART 6 *******************
@@ -81,7 +81,7 @@ let colors : (RGB | HSL)[] = []
 // It should print "Hello, <name>" for that single person OR greet each person in the array with the same format
 
 
-let greet = (person : string | string[]) => {
+let greet2 = (person : string | string[]) => {
     if (typeof person === "string"){
         console.log(`Hello ${person}`)
     } else{

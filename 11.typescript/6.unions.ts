@@ -3,7 +3,7 @@ let age: number | string = 21;
 age = 23;
 age = "24";
 
-type Point3 = {
+type Point4 = {
   x: number;
   y: number;
 };
@@ -14,7 +14,7 @@ type Loc = {
 };
 
 // Union type with type aliases
-let coordinates: Point3 | Loc = { x: 1, y: 34 };
+let coordinates: Point4 | Loc = { x: 1, y: 34 };
 coordinates = { lat: 321.213, long: 23.334 };
 
 // Function parameter union type:
